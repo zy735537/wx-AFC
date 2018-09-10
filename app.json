@@ -1,0 +1,12 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"#F9B82E",
+    "navigationBarBackgroundColor": "#363636",
+    "navigationBarTitleText": "AFC",
+    "navigationBarTextStyle":"white"
+  }
+}
