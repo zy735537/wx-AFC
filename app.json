@@ -4,9 +4,11 @@
     "pages/logs/logs"
   ],
   "window":{
-    "backgroundTextStyle":"#F9B82E",
+    "backgroundColor": "#363636",
+    "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#363636",
-    "navigationBarTitleText": "AFC",
-    "navigationBarTextStyle":"white"
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle":"white",
+    "enablePullDownRefresh": true
   }
 }

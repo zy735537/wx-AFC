@@ -3,7 +3,9 @@
   <view class="header">  
     <slot name="header"></slot>
   </view>  
-  <view class="content">这里是组件的内部细节</view>
+  <view class="content">
+    <slot name="content"></slot>
+  </view>
   <view class="footer">
     <slot name="footer"></slot>
   </view>

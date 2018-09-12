@@ -1,6 +1,9 @@
 /**app.wxss**/
 page, main{
   height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #F9B82E;
+  background-color: #F2F2F2;
 }
 
 .container {
@@ -20,7 +23,7 @@ page, main{
 
 .col {
   display: flex;
-  font-family: -apple-system-font, "Helvetica Neue", sans-serif;
+  /* font-family: -apple-system-font, "Helvetica Neue", sans-serif; */
   font-size: 17px;
 }
 
@@ -79,4 +82,81 @@ page, main{
 
 .x-center {
   text-align: center;
+}
+
+.title{
+  padding: 30rpx;
+  font-size: 50rpx;
+}
+
+.rankList{
+  display: flex;
+  align-items: center;
+}
+
+.rankItem {
+  background-color: #fff;
+  display: flex;
+  padding: 20rpx 30rpx;
+  margin-bottom: 10rpx;
+}
+
+.rankItem .item {  
+  align-self: center;
+  text-align: center;
+  vertical-align: middle; 
+  font-size: 34rpx;
+  font-weight: bolder;
+  margin: 10rpx;  
+}
+
+.rankItem .item.userinfo-avatar {
+  width: 110rpx;
+  height: 100rpx;
+}
+
+.rankItem .item.rank {
+  font-size: 40rpx;
+}
+
+.rankItem .item.name-detail .name{
+  align-self: center;
+  text-align: left;
+  display: block;
+}
+
+.rankItem .item.name-detail .detail{
+  align-self: center;
+  text-align: left;
+  display: block;
+  font-size: 24rpx;
+  color: #C1C1C1;
+}
+
+.gameinfo .name-detail {
+  display: flex;
+  align-self: center;
+  flex-direction: column;  
+}
+
+.gameinfo .name-detail .title {
+  display: block;
+  align-self: flex-start;  
+  padding: 0 20rpx;  
+}
+
+.gameinfo .name-detail .detail {
+  align-self: flex-start;  
+  padding: 0 20rpx;
+  display: block;
+  font-size: 24rpx;
+  color: #C1C1C1;  
+}
+
+
+.gameinfo-avatar {
+  width: 110rpx;
+  height: 110rpx;
+  /* margin: 20rpx; */
+  border-radius: 50%;
 }

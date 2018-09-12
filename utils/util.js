@@ -6,7 +6,8 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  // return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('.')
 }
 
 const formatNumber = n => {
@@ -14,6 +15,11 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+function fillImagePath(relativePath) {
+  return 'https://www.activesports.top/' + relativePath;
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  fillImagePath: fillImagePath
 }
