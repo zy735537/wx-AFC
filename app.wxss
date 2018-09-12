@@ -153,6 +153,13 @@ page, main{
   color: #C1C1C1;  
 }
 
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
 
 .gameinfo-avatar {
   width: 110rpx;
