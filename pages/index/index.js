@@ -5,11 +5,7 @@ const iconList = require('../../utils/icons.js')
 const util = require('../../utils/util.js')
 
 Page({
-  data: {
-    // motto: 'Hello World',
-    // userInfo: {},
-    // hasUserInfo: false,
-    // canIUse: wx.canIUse('button.open-type.getUserInfo'),    
+  data: {  
     rankList: [],
     currentGame: { "GameId": 7, "Name": "Foosball Season 6", "Type": 1, "Create_Time": "\/Date(1533036461000)\/", "begin_date": 1533081600000, "end_date": 1538351940000, "Active": true, "Icon": "/AFC/images/foosball.jpg", "Deleted": false }
   },
@@ -57,22 +53,6 @@ Page({
       })
     }
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
-  LoadPersonButtonHandler: function(){
-    this.getMyInfo(this.loadPersonInfo)
-  },
-  loadPersonInfo: function (res) {
-    // this.setData({
-    //   personIcon: util.fillImagePath(res.data.Icon)
-    // })
-  },  
   getMyInfo: function (callback){
     wx.request({
       url: 'https://www.activesports.top/AFC-Api/v1/Game/GetPersonProfile',
@@ -96,11 +76,7 @@ Page({
       } else {
         res.data[i].IconUrl = iconList.defaultUser
       }
-      
-      res.data[i].LastName += " Hello aa";
     }
-
-    console.log(this.data.personIcon)
 
     this.setData({
       rankList: res.data
