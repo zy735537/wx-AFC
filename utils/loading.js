@@ -13,7 +13,9 @@ function hide() {
   }  
 
   if (count == 0) {
-    wx.hideLoading()
+    setTimeout(function() {
+      wx.hideLoading()
+    }, 500)
   }
 }
 
