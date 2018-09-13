@@ -3,55 +3,29 @@
 const app = getApp()
 const iconList = require('../../utils/icons.js')
 const util = require('../../utils/util.js')
+const loading = require('../../utils/loading.js')
 
 Page({
   data: {  
     rankList: [],
-    currentGame: { "GameId": 7, "Name": "Foosball Season 6", "Type": 1, "Create_Time": "\/Date(1533036461000)\/", "begin_date": 1533081600000, "end_date": 1538351940000, "Active": true, "Icon": "/AFC/images/foosball.jpg", "Deleted": false }
+    currentGame: { "GameId": 7, "Name": "Foosball Season 6", "Type": 1, "Create_Time": "\/Date(1533036461000)\/", "begin_date": 1533081600000, "end_date": 1538351940000, "Active": false, "Icon": "/AFC/images/foosball.jpg", "Deleted": false }
   },
   //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+  bindViewTap: function() {    
+    // wx.navigateTo({
+    //   url: '../logs/logs'
+    // })
   },
 
-  onPullDownRefresh: function() {
-    this.getRankList(this.loadRankList)
+  onPullDownRefresh: function() {    
+    wx.stopPullDownRefresh()
+    this.getRankList(this.loadRankList)    
   },
-  onLoad: function () {    
-    this.getRankList(this.loadRankList)
-
+  onLoad: function () {        
+    this.getRankList(this.loadRankList)      
     this.setData({ iconList: iconList });
-    this.setData({ 'currentGame.begin_date': util.formatTime(new Date(this.data.currentGame.begin_date))});
-    this.setData({ 'currentGame.end_date': util.formatTime(new Date(this.data.currentGame.end_date)) });
-
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    this.setData({ 'currentGame.begin_date': util.formatTime(new Date(this.data.currentGame.begin_date))})
+    this.setData({ 'currentGame.end_date': util.formatTime(new Date(this.data.currentGame.end_date)) })
   },
   getMyInfo: function (callback){
     wx.request({
@@ -83,6 +57,7 @@ Page({
     })    
   },
   getRankList: function (callback) {
+    loading.show();
     wx.request({
       url: 'https://www.activesports.top/AFC-Api/v1/Game/GetPersonalRankinglist',
       data: {
@@ -93,11 +68,10 @@ Page({
       },
       success: function (res) {
         callback(res)
-
         console.log(res.data)
       },
-      complete: function(e){
-        wx.stopPullDownRefresh()
+      complete: function(e) {
+        loading.hide();
       }
     })
   }
