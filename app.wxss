@@ -172,3 +172,8 @@ page, main{
   /* margin: 20rpx; */
   border-radius: 50%;
 }
+
+.deactive {
+  color: #c1c1c1;  
+  opacity: 0.5;
+}

@@ -11,9 +11,18 @@ Page({
   },
   //事件处理函数
   bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    // wx.navigateTo({
+    //   url: '../logs/logs'
+    // })
+    wx.showActionSheet({
+      itemList: ['A', 'B', 'C'],
+      success: function (res) {
+        console.log(res.tapIndex)
+      },
+      fail: function (res) {
+        console.log(res.errMsg)
+      }
+    })    
   },
 
   onPullDownRefresh: function() {
