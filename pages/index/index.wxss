@@ -4,4 +4,5 @@
   flex-direction: row;
   align-items: flex-start;
   vertical-align: middle;
+  padding: 10rpx 30rpx;
 }

@@ -1,0 +1,17 @@
+<!--pages/signin/signin.wxml-->
+<main>
+  <view slot="header" class='page-title'>
+      <text class='title'>Sign in</text>        
+  </view>
+
+  <view slot="content" class="content form">
+    <view class="section">
+      <label for='username' class='form-label'>User name</label>
+      <input id='username' class='form-control' type='text' auto-focus/>
+    </view>
+    <view class="section">
+      <label for='password' class='form-label'>Password</label>
+      <input id='password' class='form-control' password='true' type='text'/>      
+    </view>    
+  </view>
+</main>

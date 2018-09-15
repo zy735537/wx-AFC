@@ -6,6 +6,14 @@ page, main{
   background-color: #F2F2F2;
 }
 
+.page-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  padding: 10rpx 30rpx;
+}
+
 .container {
   height: 100%;
   width: 100%;
@@ -36,8 +44,16 @@ page, main{
   width: 8.33333333333333%;
 }
 
+.col-offset-1 {
+  margin-left: 8.33333333333333%;
+}
+
 .col-2 {
   width: 16.6666666666666%;
+}
+
+.col-offset-2 {
+  margin-left: 16.6666666666666%;
 }
 
 .col-3 {
@@ -82,6 +98,27 @@ page, main{
 
 .x-center {
   text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;  
+  padding: 100rpx 80rpx;
+}
+
+.form-label {
+  color: #333;
+  font-weight: normal;
+}
+
+.form-control {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: #333;
+  font-weight: normal;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20rpx 30rpx;
+  margin: 10rpx 0 40rpx;
 }
 
 .title{

@@ -14,7 +14,7 @@
     </view>
   </view>
 
-  <view slot="footer" class="usermotto">
+  <view slot="footer">
     <!-- <text class="user-motto">{{motto}}</text> -->
   </view>
 </main>
