@@ -16,6 +16,14 @@ Page({
       url: '../signin/signin'
     })
   },
+  playerItemTab: function (event) {
+    var gameId = event.currentTarget.dataset.gameId
+    var personId = event.currentTarget.dataset.personId
+
+    wx.navigateTo({
+      url: '../game-history/game-history?gameId=' + gameId + "&personId=" + personId
+    })
+  },
 
   onPullDownRefresh: function() {    
     wx.stopPullDownRefresh()

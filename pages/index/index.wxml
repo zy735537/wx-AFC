@@ -20,9 +20,9 @@
 </main>
 
 <template name="rankItem">
-  <view class='rankItem row'>
+  <view class='rankItem row' bindtap="playerItemTab" data-game-id="{{GameId}}" data-person-id="{{PersonId}}">
     <text class='rank item col-1'>{{Rank}}</text>
-    <image bindtap="bindViewTap" class="userinfo-avatar item" src="{{IconUrl}}" mode="cover"></image>
+    <image class="userinfo-avatar item" src="{{IconUrl}}" mode="cover"></image>
     <view class="name-detail item col-8">
       <text class='name'>{{FirstName}} {{LastName}}</text>
       <text class='detail'>Win {{Win}} Lose {{Lose}} NP {{NetPoint}}</text>

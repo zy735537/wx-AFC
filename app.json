@@ -1,14 +1,16 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/signin/signin",
+    "pages/logs/logs",
+    "pages/game-history/game-history"
   ],
-  "window":{
+  "window": {
     "backgroundColor": "#363636",
-    "backgroundTextStyle":"light",
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#363636",
     "navigationBarTitleText": "",
-    "navigationBarTextStyle":"white",
+    "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true
   }
 }

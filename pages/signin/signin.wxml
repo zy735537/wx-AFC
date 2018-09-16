@@ -5,13 +5,23 @@
   </view>
 
   <view slot="content" class="content form">
-    <view class="section">
+    <view class="form-group">
       <label for='username' class='form-label'>User name</label>
       <input id='username' class='form-control' type='text' auto-focus/>
     </view>
-    <view class="section">
+    <view class="form-group">
       <label for='password' class='form-label'>Password</label>
       <input id='password' class='form-control' password='true' type='text'/>      
+    </view>    
+
+    <checkbox-group bindchange="checkboxChange" class="form-group">
+      <label class="checkbox">
+        <checkbox value="StaySignedIn" checked="{{false}}"/>Stay signed in
+      </label>
+    </checkbox-group>
+
+    <view class='form-group'>
+      <button class="primary"> Sign in </button>
     </view>    
   </view>
 </main>
