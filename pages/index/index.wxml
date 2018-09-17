@@ -5,10 +5,15 @@
     <view class="name-detail">
       <text class='title {{currentGame.Active ? "" : "deactive"}}'>{{currentGame.Name}}</text>
       <text class='detail'>{{currentGame.begin_date}} - {{currentGame.end_date}}</text>      
-    </view>            
+    </view>    
+    <text bindtap='signInHandler'>Sign in</text>        
   </view>
 
   <view slot="content" class="content">
+    <view wx:if="{{isAuthenticated}}">
+      <template is="me" data="{{...myRank}}"/>
+    </view>
+
     <view wx:for="{{rankList}}">
       <template is="rankItem" data="{{...item}}"/>
     </view>
@@ -28,5 +33,17 @@
       <text class='detail'>Win {{Win}} Lose {{Lose}} NP {{NetPoint}}</text>
     </view>    
     <text class="overall item col-1"> {{Overall}} </text>
+  </view>
+</template>
+
+<template name="me">
+  <view class='rankItem me row' data-game-id="{{GameId}}" data-person-id="{{PersonId}}">    
+    <text class='rank item col-4' data-suffix='th'>4</text>    
+    <view class="name-detail item col-4">
+      <image class="userinfo-avatar me item" src="{{IconUrl}}" mode="cover"></image>      
+      <!-- <text class='name'>{{FirstName}} {{LastName}}</text>
+      <text class='detail'>Win {{Win}} Lose {{Lose}} NP {{NetPoint}}</text> -->
+    </view>    
+    <text class="overall item col-4" data-suffix='pts'>335</text>
   </view>
 </template>

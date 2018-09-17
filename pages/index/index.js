@@ -3,16 +3,17 @@
 const app = getApp()
 const iconList = require('../../utils/icons.js')
 const util = require('../../utils/util.js')
-//const loading = require('../../utils/loading.js')
 const api = require('../../utils/webapi.js')
+const auth = require('../../utils/authentication.js')
 
 Page({
-  data: {  
+  data: {      
     rankList: [],
+    myRank: { IconUrl: iconList.defaultUser},
     currentGame: { "GameId": 7, "Name": "Foosball Season 6", "Type": 1, "Create_Time": "\/Date(1533036461000)\/", "begin_date": 1533081600000, "end_date": 1538351940000, "Active": true, "Icon": "/AFC/images/foosball.jpg", "Deleted": false }
   },
   //事件处理函数
-  bindViewTap: function() {
+  signInHandler: function() {
     wx.navigateTo({
       url: '../signin/signin'
     })
@@ -30,11 +31,14 @@ Page({
     wx.stopPullDownRefresh()
     this.getRankList(this.loadRankList)    
   },
-  onLoad: function () {    
-    this.getRankList(this.loadRankList)      
+  onLoad: function () {        
     this.setData({ iconList: iconList });
+    this.getRankList(this.loadRankList)          
     this.setData({ 'currentGame.begin_date': util.formatTime(new Date(this.data.currentGame.begin_date))})
     this.setData({ 'currentGame.end_date': util.formatTime(new Date(this.data.currentGame.end_date)) })
+  },
+  onShow: function() {
+    this.setData({ isAuthenticated: auth.isAuthenticated() });
   },
   getMyInfo: function (callback){
     wx.request({

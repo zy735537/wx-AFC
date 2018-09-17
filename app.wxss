@@ -165,17 +165,27 @@ button {
   margin-bottom: 10rpx;
 }
 
+.rankItem.me {
+  background-color: #363636;
+}  
+
+
 .rankItem .item {  
   align-self: center;
   text-align: center;
   vertical-align: middle; 
   font-size: 34rpx;  
-  margin: 10rpx;  
+  /* margin: 10rpx;   */
 }
 
 .rankItem .item.userinfo-avatar {
   width: 110rpx;
-  height: 100rpx;
+  height: 110rpx;
+}
+
+.rankItem.me .item.userinfo-avatar {
+  width: 190rpx;
+  height: 190rpx;
 }
 
 .rankItem .item.rank {
@@ -183,9 +193,25 @@ button {
   font-weight: bolder;
 }
 
+.rankItem.me .item.rank,
+.rankItem.me .item.overall {
+  font-size: 50rpx;
+  font-weight: bolder;
+}
+
+.rankItem .item.rank::after,
+.rankItem .item.overall::after {
+  content: attr(data-suffix);
+  font-weight: normal;
+  font-size: 30rpx;
+}
+
 .rankItem .item.overall {  
   font-size: 36rpx;
-  /* font-weight: bolder; */
+}
+
+.rankItem .item.name-detail {
+  padding-left: 10rpx;
 }
 
 .rankItem .item.name-detail .name{
@@ -225,7 +251,7 @@ button {
 .userinfo-avatar {
   width: 100rpx;
   height: 100rpx;
-  margin: 20rpx;
+  margin: 0 10rpx;
   border-radius: 50%;
   border: 1px solid #ccc;
 }

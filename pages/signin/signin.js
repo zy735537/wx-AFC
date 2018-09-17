@@ -28,17 +28,9 @@ Page({
       },
       success: function (res) {
         auth.signIn(res.data, staySignedIn)
-
-        console.log(auth.isAuthenticated())
-        console.log(auth.isStaySignedIn())
-        console.log(auth.getToken())        
-        console.log(auth.getPersonId())
-
-        auth.signOut()
-        console.log(auth.isAuthenticated())
-        console.log(auth.isStaySignedIn())
-        console.log(auth.getToken())        
-        console.log(auth.getPersonId())        
+        wx.redirectTo({
+          url: '../index/index',
+        })    
       }
     })    
   },

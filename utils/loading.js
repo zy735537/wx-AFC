@@ -23,7 +23,7 @@ function hide(completeHandler) {
 
 function showError(message) {
   wx.showToast({
-    title: 'Error: ' + message,
+    title: 'ERROR\r\n' + message,
     icon: 'none',
     duration: 3000
   })
