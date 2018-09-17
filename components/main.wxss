@@ -7,13 +7,11 @@
 
 .header {
   background-color: #363636;
-  /* color: #F9B82E; */
   width: 100%;
   align-self: flex-start;
   vertical-align: middle;
   position: fixed;
-  height: 130rpx;
-  padding: 10rpx 30rpx 0;
+  height: 140rpx;
 }
 
 .content{

@@ -3,7 +3,8 @@
 const app = getApp()
 const iconList = require('../../utils/icons.js')
 const util = require('../../utils/util.js')
-const loading = require('../../utils/loading.js')
+//const loading = require('../../utils/loading.js')
+const api = require('../../utils/webapi.js')
 
 Page({
   data: {  
@@ -12,18 +13,17 @@ Page({
   },
   //事件处理函数
   bindViewTap: function() {
-    // wx.navigateTo({
-    //   url: '../logs/logs'
-    // })
-    wx.showActionSheet({
-      itemList: ['A', 'B', 'C'],
-      success: function (res) {
-        console.log(res.tapIndex)
-      },
-      fail: function (res) {
-        console.log(res.errMsg)
-      }
-    })    
+    wx.navigateTo({
+      url: '../signin/signin'
+    })
+  },
+  playerItemTab: function (event) {
+    var gameId = event.currentTarget.dataset.gameId
+    var personId = event.currentTarget.dataset.personId
+
+    wx.navigateTo({
+      url: '../game-history/game-history?gameId=' + gameId + "&personId=" + personId
+    })
   },
 
   onPullDownRefresh: function() {    
@@ -66,22 +66,9 @@ Page({
     })    
   },
   getRankList: function (callback) {
-    loading.show();
-    wx.request({
-      url: 'https://www.activesports.top/AFC-Api/v1/Game/GetPersonalRankinglist',
-      data: {
-        gameId: 7
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        callback(res)
-        console.log(res.data)
-      },
-      complete: function(e) {
-        loading.hide();
-      }
+    api.getRankList({ 
+      data: {gameId: 7},       
+      success: callback
     })
   }
 })

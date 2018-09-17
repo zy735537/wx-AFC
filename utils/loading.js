@@ -7,19 +7,30 @@ function show() {
   }    
 }
 
-function hide() {
+function hide(completeHandler) {
   if (count > 0) {
     count--
   }  
 
   if (count == 0) {
     setTimeout(function() {
-      wx.hideLoading()
+      wx.hideLoading({
+        complete: completeHandler
+      })
     }, 500)
   }
 }
 
+function showError(message) {
+  wx.showToast({
+    title: 'Error: ' + message,
+    icon: 'none',
+    duration: 3000
+  })
+}
+
 module.exports = {
   show: show,
-  hide: hide
+  hide: hide,
+  showError: showError
 }
