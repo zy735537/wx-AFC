@@ -1,4 +1,39 @@
 /**app.wxss**/
+@font-face {
+  font-family: "iconfont";  
+  src: url('data:application/x-font-woff;charset=utf-8;base64,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') format('woff')  
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-activity:before { content: "\e6de"; }
+
+.icon-add:before { content: "\e6df"; }
+
+.icon-addition:before { content: "\e6e0"; }
+
+.icon-close:before { content: "\e6e9"; }
+
+.icon-delete_fill:before { content: "\e6f2"; }
+
+.icon-empty_fill:before { content: "\e6f7"; }
+
+.icon-group:before { content: "\e6ff"; }
+
+.icon-mine:before { content: "\e70e"; }
+
+.icon-people:before { content: "\e715"; }
+
+.icon-scan:before { content: "\e722"; }
+
+.icon-success_fill:before { content: "\e72d"; }
+
 page, main{
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -248,6 +283,22 @@ button {
   display: block;
   font-size: 24rpx;
   color: #C1C1C1;  
+}
+
+.gameinfo .header-right {
+  align-self: flex-end;
+  align-items: flex-end;
+  flex-direction: row;  
+  display: flex;  
+  width: 120rpx;
+  height: 110rpx;
+}
+
+.gameinfo .header-right .iconfont {
+  font-size: 60rpx;
+  width: 100%;
+  align-self: center;
+  text-align: right;
 }
 
 .userinfo-avatar {

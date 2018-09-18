@@ -5,8 +5,10 @@
     <view class="name-detail">
       <text class='title {{currentGame.Active ? "" : "deactive"}}'>{{currentGame.Name}}</text>
       <text class='detail'>{{currentGame.begin_date}} - {{currentGame.end_date}}</text>      
-    </view>    
-    <text bindtap='signInHandler'>Sign in</text>        
+    </view>   
+    <view wx:if="{{!isAuthenticated}}" class='header-right'>
+      <text class='iconfont icon-people' bindtap='signInHandler'></text>        
+    </view>         
   </view>
 
   <view slot="content" class="content">
