@@ -1,5 +1,6 @@
 module.exports = {
   getAuthKey: getAuthKey,
+  getCurrentGameKey: getCurrentGameKey,
   getAPIUrl: getAPIUrl,
   getImageFullPath: getImageFullPath,
   getData: getData,
@@ -17,6 +18,10 @@ function getImageFullPath(relativePath) {
 
 function getAuthKey() {
   return "key-authentication";
+}
+
+function getCurrentGameKey() {
+  return "key-CurrentGame";
 }
 
 function getData(key) {

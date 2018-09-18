@@ -1,7 +1,7 @@
 // pages/signin/signin.js
 const md5 = require('../../utils/md5.js')
 const api = require('../../utils/webapi.js')
-const auth = require('../../utils/authentication.js')
+const session = require('../../utils/session.js')
 
 Page({
 
@@ -26,9 +26,9 @@ Page({
         username: username,
         passwordhash: hashPassword
       },
-      success: function (res) {
-        auth.signIn(res.data, staySignedIn)
-        wx.redirectTo({
+      success: function (data) {
+        session.signIn(data, staySignedIn)
+        wx.reLaunch({
           url: '../index/index',
         })    
       }

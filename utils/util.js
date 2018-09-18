@@ -15,11 +15,25 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
-function fillImagePath(relativePath) {
-  return 'https://www.activesports.top/' + relativePath;
+function getNumberSuffix(num) {
+  if (num == null)
+    return ""
+
+  var remainder = num%10
+  switch (remainder)
+  {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
 }
 
 module.exports = {
   formatTime: formatTime,
-  fillImagePath: fillImagePath
+  getNumberSuffix: getNumberSuffix
 }

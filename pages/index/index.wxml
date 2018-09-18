@@ -25,7 +25,7 @@
 </main>
 
 <template name="rankItem">
-  <view class='rankItem row' bindtap="playerItemTab" data-game-id="{{GameId}}" data-person-id="{{PersonId}}">
+  <view class='rankItem row {{ Me ? "me" : "" }}' bindtap="playerItemTab" data-game-id="{{GameId}}" data-person-id="{{PersonId}}">
     <text class='rank item col-1'>{{Rank}}</text>
     <image class="userinfo-avatar item" src="{{IconUrl}}" mode="cover"></image>
     <view class="name-detail item col-8">
@@ -37,13 +37,13 @@
 </template>
 
 <template name="me">
-  <view class='rankItem me row' data-game-id="{{GameId}}" data-person-id="{{PersonId}}">    
-    <text class='rank item col-4' data-suffix='th'>4</text>    
+  <view class='person-rank rankItem row' data-game-id="{{GameId}}" data-person-id="{{PersonId}}">    
+    <text class='rank item col-4' data-suffix='{{rankSuffix}}'>{{Rank}}</text>    
     <view class="name-detail item col-4">
       <image class="userinfo-avatar me item" src="{{IconUrl}}" mode="cover"></image>      
       <!-- <text class='name'>{{FirstName}} {{LastName}}</text>
       <text class='detail'>Win {{Win}} Lose {{Lose}} NP {{NetPoint}}</text> -->
     </view>    
-    <text class="overall item col-4" data-suffix='pts'>335</text>
+    <text class="overall item col-4" data-suffix='pts'>{{Overall}}</text>
   </view>
 </template>

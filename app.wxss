@@ -165,17 +165,19 @@ button {
   margin-bottom: 10rpx;
 }
 
-.rankItem.me {
+.rankItem.person-rank {
   background-color: #363636;
 }  
 
+.rankItem.me {
+  background-color:#F2F2F2;
+} 
 
 .rankItem .item {  
   align-self: center;
   text-align: center;
   vertical-align: middle; 
   font-size: 34rpx;  
-  /* margin: 10rpx;   */
 }
 
 .rankItem .item.userinfo-avatar {
@@ -183,7 +185,7 @@ button {
   height: 110rpx;
 }
 
-.rankItem.me .item.userinfo-avatar {
+.rankItem.person-rank .item.userinfo-avatar {
   width: 190rpx;
   height: 190rpx;
 }
@@ -193,8 +195,8 @@ button {
   font-weight: bolder;
 }
 
-.rankItem.me .item.rank,
-.rankItem.me .item.overall {
+.rankItem.person-rank .item.rank,
+.rankItem.person-rank .item.overall {
   font-size: 50rpx;
   font-weight: bolder;
 }

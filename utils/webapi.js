@@ -1,6 +1,7 @@
 module.exports = {
   signIn: signIn,
-  getRankList: getRankList  
+  getRankList: getRankList,
+  getPersonRank: getPersonRank
 }
 
 const data = require('data.js')
@@ -43,6 +44,29 @@ function getRankList(options) {
   call(options)
 }
 
+// options: { 
+//   data: { gameId: 7, personId: 1 }, 
+//   success: function (res) { ... } 
+// }
+function getPersonRank(options) {
+  options.url = data.getAPIUrl('/Game/GetPersonalRankinglist')
+  var callback = options.success
+  options.success = function (data) {
+    var personRank;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].PersonId == options.data.personId) {
+        personRank = data[i]
+      }      
+    }
+
+    if (callback != null) {
+      callback(personRank)
+    }    
+  }
+
+  call(options)
+}
+
 function call(options) {
   loading.show();
 
@@ -52,13 +76,13 @@ function call(options) {
     method: options.method == null ? defaultOptions.method : options.method,
     header: options.header == null ? defaultOptions.header : options.header,
     success: function (res) {
-      if (options.success != null) {
-        options.success(res)
-      }
+      // if (options.success != null) {
+      //   options.success(res.data)
+      // }
       
-      if (log2Console) {
-        console.log(res.data)
-      }      
+      // if (log2Console) {
+      //   console.log(res.data)
+      // }      
     },
     fail: function (e) {
       if (log2Console) {
@@ -81,6 +105,10 @@ function call(options) {
           loading.showError(e.data.Message)
         })
       } else {
+        if (options.success != null) {
+          options.success(e.data)
+        }
+                
         loading.hide()
       }
 

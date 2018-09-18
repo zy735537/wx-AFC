@@ -1,11 +1,11 @@
 //app.js
-const auth = require('/utils/authentication.js')
+const session = require('/utils/session.js')
 
 App({
   onLaunch: function () {
-    auth.init()
-    if (auth.isAuthenticated() && !auth.isStaySignedIn()) {
-      auth.signOut();
+    session.init()
+    if (session.isAuthenticated() && !session.isStaySignedIn()) {
+      session.signOut();
     }
 
     // 展示本地存储能力

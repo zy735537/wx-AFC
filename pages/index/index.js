@@ -4,12 +4,13 @@ const app = getApp()
 const iconList = require('../../utils/icons.js')
 const util = require('../../utils/util.js')
 const api = require('../../utils/webapi.js')
-const auth = require('../../utils/authentication.js')
+const session = require('../../utils/session.js')
+const globalData = require('../../utils/data.js')
 
 Page({
-  data: {      
+  data: {    
     rankList: [],
-    myRank: { IconUrl: iconList.defaultUser},
+    myRank: { IconUrl: iconList.defaultUser },
     currentGame: { "GameId": 7, "Name": "Foosball Season 6", "Type": 1, "Create_Time": "\/Date(1533036461000)\/", "begin_date": 1533081600000, "end_date": 1538351940000, "Active": true, "Icon": "/AFC/images/foosball.jpg", "Deleted": false }
   },
   //事件处理函数
@@ -26,47 +27,36 @@ Page({
       url: '../game-history/game-history?gameId=' + gameId + "&personId=" + personId
     })
   },
-
   onPullDownRefresh: function() {    
     wx.stopPullDownRefresh()
-    this.getRankList(this.loadRankList)    
+    this.getRankList(this.loadRankList)
+    this.getPersonRank(this.loadPersonRank)
   },
   onLoad: function () {        
     this.setData({ iconList: iconList });
-    this.getRankList(this.loadRankList)          
-    this.setData({ 'currentGame.begin_date': util.formatTime(new Date(this.data.currentGame.begin_date))})
+    this.setData({ 'currentGame.begin_date': util.formatTime(new Date(this.data.currentGame.begin_date)) })
     this.setData({ 'currentGame.end_date': util.formatTime(new Date(this.data.currentGame.end_date)) })
+
+    this.getRankList(this.loadRankList)
+    this.getPersonRank(this.loadPersonRank)
   },
   onShow: function() {
-    this.setData({ isAuthenticated: auth.isAuthenticated() });
+    this.setData({ isAuthenticated: session.isAuthenticated() });
+    this.setData({ currentPersonId: session.getPersonId() });
   },
-  getMyInfo: function (callback){
-    wx.request({
-      url: 'https://www.activesports.top/AFC-Api/v1/Game/GetPersonProfile',
-      data: {
-        personId: 1        
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {        
-        callback(res)
-
-        console.log(res.data)
-      }
-    })  
-  },
-  loadRankList: function (res) {
-    for (var i = 0; i < res.data.length; ++i) {    
-      if (res.data[i].IconUrl != null) {
-        res.data[i].IconUrl = util.fillImagePath(res.data[i].IconUrl)
+  loadRankList: function (data) {
+    for (var i = 0; i < data.length; ++i) {    
+      if (data[i].IconUrl != null) {
+        data[i].IconUrl = globalData.getImageFullPath(data[i].IconUrl)
       } else {
-        res.data[i].IconUrl = iconList.defaultUser
+        data[i].IconUrl = iconList.defaultUser
       }
-    }
 
+      data[i].Me = data[i].PersonId == this.data.currentPersonId           
+    }
+    
     this.setData({
-      rankList: res.data
+      rankList: data
     })    
   },
   getRankList: function (callback) {
@@ -74,5 +64,29 @@ Page({
       data: {gameId: 7},       
       success: callback
     })
+  },
+  getPersonRank: function (callback) {
+    var currentGameId = session.getGameId()
+    var currentPersonId = session.getPersonId()
+    if (currentGameId != null && currentPersonId != null) {
+      api.getPersonRank({
+        data: { gameId: currentGameId, personId: currentPersonId },
+        success: callback
+      })
+    }
+  },
+  loadPersonRank: function (data) {
+    if (data != null) {
+      if (data.IconUrl != null) {
+        data.IconUrl = globalData.getImageFullPath(data.IconUrl)
+      } else {
+        data.IconUrl = iconList.defaultUser
+      }            
+
+      data.rankSuffix = util.getNumberSuffix(data.Rank)
+      this.setData({
+            myRank: data
+          }) 
+    }    
   }
 })
