@@ -1,2 +1,41 @@
 <!--pages/game-history/game-history.wxml-->
-<text>pages/game-history/game-history.wxml</text>
+<main>
+  <view slot="header" class="gameinfo {{currentGame.Active ? '' : 'deactive'}}">
+    <!-- <image bindtap="bindViewTap" class="gameinfo-avatar" src="{{iconList.logoUrl}}" mode="cover"></image>   
+    <view class="name-detail">
+      <text class='title {{currentGame.Active ? "" : "deactive"}}'>{{currentGame.Name}}</text>
+      <text class='detail'>{{currentGame.begin_date}} - {{currentGame.end_date}}</text>      
+    </view>   
+    <view wx:if="{{!isAuthenticated}}" class='header-right'>
+      <text class='iconfont icon-people' bindtap='signInHandler'></text>        
+    </view>          -->
+  </view>
+
+  <view slot="content" class="content">    
+    <template is="me" data="{{...myRank}}"/>    
+
+    <view>
+      <canvas style="width: 100%;" canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+    </view>
+
+    <!-- <view wx:for="{{rankList}}">
+      <template is="rankItem" data="{{...item}}"/>
+    </view> -->
+  </view>
+
+  <view slot="footer">
+    <!-- <text class="user-motto">{{motto}}</text> -->
+  </view>
+</main>
+
+<template name="me">
+  <view class='person-rank-sm rankItem row' data-game-id="{{GameId}}" data-person-id="{{PersonId}}">    
+    <text class='rank item col-4' data-suffix='{{rankSuffix}}'>{{Rank}}</text>    
+    <view class="name-detail item col-4">
+      <image class="userinfo-avatar me item" src="{{IconUrl}}" mode="cover"></image>      
+      <!-- <text class='name'>{{FirstName}} {{LastName}}</text>
+      <text class='detail'>Win {{Win}} Lose {{Lose}} NP {{NetPoint}}</text> -->
+    </view>    
+    <text class="overall item col-4" data-suffix='pts'>{{Overall}}</text>
+  </view>
+</template>

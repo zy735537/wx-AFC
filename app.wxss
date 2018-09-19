@@ -200,7 +200,8 @@ button {
   margin-bottom: 10rpx;
 }
 
-.rankItem.person-rank {
+.rankItem.person-rank,
+.rankItem.person-rank-sm {
   background-color: #363636;
 }  
 
@@ -231,7 +232,9 @@ button {
 }
 
 .rankItem.person-rank .item.rank,
-.rankItem.person-rank .item.overall {
+.rankItem.person-rank .item.overall,
+.rankItem.person-rank-sm .item.rank,
+.rankItem.person-rank-sm .item.overall {
   font-size: 50rpx;
   font-weight: bolder;
 }

@@ -29,16 +29,16 @@ Page({
   },
   onPullDownRefresh: function() {    
     wx.stopPullDownRefresh()
-    this.getRankList(this.loadRankList)
-    this.getPersonRank(this.loadPersonRank)
+    this.getRankList()
+    this.getPersonRank()
   },
   onLoad: function () {        
     this.setData({ iconList: iconList });
     this.setData({ 'currentGame.begin_date': util.formatTime(new Date(this.data.currentGame.begin_date)) })
     this.setData({ 'currentGame.end_date': util.formatTime(new Date(this.data.currentGame.end_date)) })
 
-    this.getRankList(this.loadRankList)
-    this.getPersonRank(this.loadPersonRank)
+    this.getRankList()
+    this.getPersonRank()
   },
   onShow: function() {
     this.setData({ isAuthenticated: session.isAuthenticated() });
@@ -59,19 +59,19 @@ Page({
       rankList: data
     })    
   },
-  getRankList: function (callback) {
+  getRankList: function () {
     api.getRankList({ 
       data: {gameId: 7},       
-      success: callback
+      success: this.loadRankList
     })
   },
-  getPersonRank: function (callback) {
+  getPersonRank: function () {
     var currentGameId = session.getGameId()
     var currentPersonId = session.getPersonId()
     if (currentGameId != null && currentPersonId != null) {
       api.getPersonRank({
         data: { gameId: currentGameId, personId: currentPersonId },
-        success: callback
+        success: this.loadPersonRank
       })
     }
   },

@@ -4,15 +4,15 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.2.5",
-	"appid": "wxe1a08da553ef995e",
+	"libVersion": "2.3.0",
+	"appid": "wx4366c24d413367b2",
 	"projectname": "AFC",
 	"debugOptions": {
 		"hidedInDevtools": []
