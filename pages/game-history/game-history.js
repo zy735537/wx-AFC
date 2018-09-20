@@ -117,7 +117,7 @@ Page({
 function initChart(canvas, width, height) {
   const chart = echarts.init(canvas, null, {
     width: width,
-    height: height
+    height: 400
   });
   canvas.setChart(chart);
 
@@ -125,7 +125,7 @@ function initChart(canvas, width, height) {
     title: {      
       show: false
     },
-    color: ["#6e7074", "#67E0E3", "#9FE6B8"],
+    color: ["#F2F2F2"],
     legend: {
       show: false
     },
@@ -150,8 +150,8 @@ function initChart(canvas, width, height) {
     series: [{
       name: 'A',
       type: 'line',
-      smooth: true,
-      data: [18, 36, 65, 30, 78, 40, 33, 65, 38]
+      // smooth: true,
+      data: [18, 36, 65, 30, 178, 140, 33, 65, 38]
     }]
   };
 
