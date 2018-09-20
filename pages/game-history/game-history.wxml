@@ -14,8 +14,8 @@
   <view slot="content" class="content">    
     <template is="me" data="{{...myRank}}"/>    
 
-    <view>
-      <canvas style="width: 100%;" canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+    <view class="chart-container">
+      <ec-canvas id="chart-container" canvas-id="person-chart" ec="{{ ec }}"></ec-canvas>
     </view>
 
     <!-- <view wx:for="{{rankList}}">

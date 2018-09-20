@@ -1,12 +1,12 @@
 // pages/game-history/game-history.js
+import * as echarts from '../../components/ec-canvas/echarts.min';
+
 const globalData = require('../../utils/data.js')
 const iconList = require('../../utils/icons.js')
 const util = require('../../utils/util.js')
 const api = require('../../utils/webapi.js')
-var wxCharts = require('../../utils/wx-charts.js');
 
 var app = getApp();
-var lineChart = null;
 
 Page({
 
@@ -16,7 +16,8 @@ Page({
   data: {
     gameId: null,
     personId: null,
-    myRank: { IconUrl: iconList.defaultUser }
+    myRank: { IconUrl: iconList.defaultUser },
+    ec: { onInit: initChart }
   },
   touchHandler: function (e) {
     console.log(lineChart.getCurrentDataIndex(e));
@@ -35,53 +36,6 @@ Page({
   onLoad: function (options) {
     this.setData({ gameId: options.gameId, personId: options.personId }) 
     this.getPersonRank()
-
-    var windowWidth = 320;
-    try {
-      var res = wx.getSystemInfoSync();
-      windowWidth = res.windowWidth;
-      console.log(windowWidth);
-    } catch (e) {
-      console.error('getSystemInfoSync failed!');
-    }
-
-    lineChart = new wxCharts({
-      canvasId: 'lineCanvas',
-      type: 'line',
-      categories: ['1', '2', '3'],
-      animation: true,
-      // background: '#f5f5f5',
-      series: [{
-        name: '成交量1',
-        data: [18, 12, 23, 123, 23, 78, 356, 56],
-        format: function (val, name) {
-          return val.toFixed(2) + '万';
-        }
-      }, {
-        name: '成交量2',
-        data: [2, 0, 0, 3, null, 4, 0, 0, 2, 0],
-        format: function (val, name) {
-          return val.toFixed(2) + '万';
-        }
-      }],
-      xAxis: {
-        disableGrid: true
-      },
-      yAxis: {
-        title: '成交金额 (万元)',
-        format: function (val) {
-          return val.toFixed(2);
-        },
-        min: 0
-      },
-      width: windowWidth,
-      height: 200,
-      dataLabel: false,
-      dataPointShape: true,
-      extra: {
-        lineStyle: 'curve'
-      }
-    });    
   },
 
   /**
@@ -158,4 +112,50 @@ Page({
       })
     }
   }  
-})
+});
+
+function initChart(canvas, width, height) {
+  const chart = echarts.init(canvas, null, {
+    width: width,
+    height: height
+  });
+  canvas.setChart(chart);
+
+  var option = {
+    title: {      
+      show: false
+    },
+    color: ["#6e7074", "#67E0E3", "#9FE6B8"],
+    legend: {
+      show: false
+    },
+    grid: {
+      containLabel: false,
+      left: 0,
+      right: 0
+    },
+    tooltip: {
+      show: true,
+      trigger: 'axis'
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['', '', '', '', '', '', ''],
+      show: false
+    },
+    yAxis: {
+      show: false    
+    },
+    series: [{
+      name: 'A',
+      type: 'line',
+      smooth: true,
+      data: [18, 36, 65, 30, 78, 40, 33, 65, 38]
+    }]
+  };
+
+  chart.setOption(option);
+  return chart;
+}
+
