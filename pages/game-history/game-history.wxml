@@ -18,9 +18,9 @@
       <ec-canvas id="chart-container" canvas-id="person-chart" ec="{{ ec }}"></ec-canvas>
     </view>
 
-    <!-- <view wx:for="{{rankList}}">
-      <template is="rankItem" data="{{...item}}"/>
-    </view> -->
+    <view wx:for="{{matchList}}">
+      <template is="match" data="{{...item}}"/>
+    </view>
   </view>
 
   <view slot="footer">
@@ -37,5 +37,48 @@
       <text class='detail'>Win {{Win}} Lose {{Lose}} NP {{NetPoint}}</text> -->
     </view>    
     <text class="overall item col-4" data-suffix='pts'>{{Overall}}</text>
+  </view>
+</template>
+
+<template name="match">
+  <view class="match list-group-item" id="matchRow8148" data-match-id="8148" hidefocus="true">
+      <view class="match-person-a">
+          <view class="user-icon name" data-person-id="1">
+              <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="Richard Zhang" class="rank userinfo-avatar person-1" src="{{IconUrl}}" alt="RZ" data-person-id="1" data-original-title="Richard Zhang"></image>
+
+              <text class="badge person-1">RZ</text>
+
+              <text class="overall me">388</text>
+          </view>
+
+      <view class="user-icon name" data-person-id="16">
+        <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="Phoenix Zhong" class="rank userinfo-avatar person-16" src="{{IconUrl}}" alt="PZ" data-person-id="16" data-original-title="Phoenix Zhong"></image>
+        <text class="badge person-16">PZ</text>
+
+          <text class="overall ">510</text>
+
+      </view>
+      </view>
+      <view class="match-score win" data-toggle="popover" title="" data-placement="top" data-content="">
+          <text class="score-a">10</text>
+          <text class="score-separator">-</text>
+          <text class="score-b">2</text>
+      </view>
+      <view class="match-person-b">
+          <view class="user-icon name" data-person-id="12">
+              <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="Newstar Liu" class="rank userinfo-avatar person-12" src="{{IconUrl}}" alt="NL" data-person-id="12" data-original-title="Newstar Liu"></image>
+        
+              <text class="badge person-12">NL</text>
+
+                  <text class="overall ">364</text>
+
+          </view>
+      <view class="user-icon name" data-person-id="11">
+        <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="Zack Qiu" class="rank userinfo-avatar person-11" src="{{IconUrl}}" alt="ZQ" data-person-id="11" data-original-title="Zack Qiu"></image>
+        <text class="badge person-11">ZQ</text>
+
+        <text class="overall ">541</text>
+      </view>
+      </view>
   </view>
 </template>

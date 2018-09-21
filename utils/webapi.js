@@ -1,7 +1,8 @@
 module.exports = {
   signIn: signIn,
   getRankList: getRankList,
-  getPersonRank: getPersonRank
+  getPersonRank: getPersonRank,
+  getPageMatchesByPerson: getPageMatchesByPerson
 }
 
 const data = require('data.js')
@@ -64,6 +65,15 @@ function getPersonRank(options) {
     }    
   }
 
+  call(options)
+}
+
+// options: { 
+//   data: { gameId: 7, personId: 1, pageNum = 1, itemsPerPage = 20 },
+//   success: function (res) { ... } 
+// }
+function getPageMatchesByPerson(options) {
+  options.url = data.getAPIUrl('/Game/GetPageMatchsByPerson')
   call(options)
 }
 

@@ -3,6 +3,7 @@ module.exports = {
   getCurrentGameKey: getCurrentGameKey,
   getAPIUrl: getAPIUrl,
   getImageFullPath: getImageFullPath,
+  getItemsPerPage: getItemsPerPage,
   getData: getData,
   setData: setData,
   removeData: removeData
@@ -14,6 +15,10 @@ function getAPIUrl(relativePath) {
 
 function getImageFullPath(relativePath) {
   return 'https://www.activesports.top/' + relativePath;
+}
+
+function getItemsPerPage() {
+  return 20
 }
 
 function getAuthKey() {
