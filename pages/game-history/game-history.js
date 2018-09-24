@@ -172,8 +172,8 @@ function setOption(chart, data) {
       containLabel: false,
       x: 30,
       y: 10,
-      x2: 10,
-      y2: 10
+      x2: 30,
+      y2: 20
     },
     tooltip: {
       show: true,
