@@ -31,7 +31,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.initChart();
     this.setData({ gameId: options.gameId, personId: options.personId })     
     this.loadData()
   },
@@ -110,13 +109,8 @@ Page({
       overall.push(data.Items[i].OverallA)
     }
 
-    this.setData({ matchList : data.Items }) 
-    
-    // this.chart.setOption({
-    //   series: [{        
-    //     data: overall
-    //   }]
-    // });
+    this.setData({ matchList : data.Items });    
+    this.initChart(overall);
   },
   getPersonRank: function () {
     var currentGameId = this.data.gameId
@@ -142,7 +136,7 @@ Page({
       })
     }
   },
-  initChart: function() {
+  initChart: function(data) {      
     this.ecComponent = this.selectComponent('#chart-container');
     this.ecComponent.init((canvas, width, height) => {
       var chart = echarts.init(canvas, null, {
@@ -150,43 +144,55 @@ Page({
         height: height
       });
 
-      setOption(chart);
-      this.chart = chart;
+      setOption(chart, data);
       return chart;
     });
   }
 });
 
-function setOption(chart) {
+function setOption(chart, data) {
+  var min = 0;
+  for (var i = 0; i < data.length; ++i) {
+    if (min == 0) {
+      min = data[i];
+    }
+    
+    min = Math.min(data[i], min);
+  }  
+
   var option = {
     title: {
       show: false
     },
-    color: ["#F9B82E"],
+    color: ['#363636', "#F9B82E"],
     legend: {
       show: false
     },
     grid: {
       containLabel: false,
-      // left: 0,
-      // right: 0,
-      x: 10,
+      x: 30,
       y: 10,
       x2: 10,
-      y2: 0
+      y2: 10
     },
     tooltip: {
       show: true,
-      trigger: 'axis'
+      trigger: 'axis',
+      position: ['50%', 10],  
+      // backgroundColor: '#363636',
+      textStyle: {
+        color: '#F9B82E',
+      }
     },
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: [],
+      data: data,
       show: false
     },
     yAxis: {
-      show: false
+      show: false,
+      min: min    
     },
     series: [{
       name: '',
@@ -194,68 +200,20 @@ function setOption(chart) {
       //smooth: true,
       symbol: 'circle',
       symbolSize: 6,
+      label: {
+        color: '#F9B82E',
+      },
       lineStyle: {
         width: 1.8,
+        // color: '#363636'
       },
-      data: [12, 34, 656, 5]
+      itemStyle: {
+        color: '#F9B82E',
+      },
+      data: data
     }]
   };
 
   chart.setOption(option);
 }
-
-// function initChart(canvas, width, height) {
-//   var chart = echarts.init(canvas, null, {
-//     width: width,
-//     height: height
-//   });
-//   canvas.setChart(chart);
-
-//   var option = {
-//     title: {      
-//       show: false
-//     },
-//     color: ["#F9B82E"],
-//     legend: {
-//       show: false
-//     },
-//     grid: {
-//       containLabel: false,
-//       // left: 0,
-//       // right: 0,
-//       x: 10,
-//       y: 10,
-//       x2: 10,
-//       y2: 0      
-//     },
-//     tooltip: {
-//       show: true,
-//       trigger: 'axis'
-//     },
-//     xAxis: {
-//       type: 'category',
-//       boundaryGap: false,
-//       data: [],
-//       show: false
-//     },
-//     yAxis: {
-//       show: false    
-//     },
-//     series: [{
-//       name: '',
-//       type: 'line',
-//       //smooth: true,
-//       symbol: 'circle',
-//       symbolSize: 6,
-//       lineStyle: {
-//         width: 1.8,
-//       },      
-//       data: []
-//     }]
-//   };
-
-//   chart.setOption(option);
-//   this.chart = chart;
-//   return chart;
-// }
 

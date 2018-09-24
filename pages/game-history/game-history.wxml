@@ -41,7 +41,7 @@
 </template>
 
 <template name="match">
-  <view class="match list-group-item" id="matchRow8148" data-match-id="8148" hidefocus="true">
+  <view class="match list-group-item rankItem" id="matchRow8148" data-match-id="8148" hidefocus="true">
       <view class="match-person-a">
           <view class="user-icon name" data-person-id="1">
               <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="Richard Zhang" class="rank userinfo-avatar person-1" src="{{IconUrl}}" alt="RZ" data-person-id="1" data-original-title="Richard Zhang"></image>
