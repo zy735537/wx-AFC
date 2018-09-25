@@ -45,7 +45,7 @@ ec-canvas {
     }
 
         .match .match-person-a .user-icon,
-        .match .match-person-b .user-icon {
+        .match .match-person-b .user-icon {            
             display: inline-block;
             text-align: center;
             padding: 0 5px;
@@ -115,17 +115,15 @@ ec-canvas {
         }
 
 .user-icon text.badge {  
-    position: absolute;
-    top: 12px;
+    position: absolute;    
     color: #fff;
     background-color: #d7d7d7;
     border: 1px solid #d7d7d7;
-    border-radius: 6px;
-    width: 26px;
-    height: 16px;
-    padding: 1px;
-    font-size: 8px;
-    line-height: 11px;
-    margin-left: 15px;
-    display: none;
+    border-radius: 6rpx;
+    width: 26rpx;
+    height: 16rpx;
+    padding: 4rpx;
+    font-size: 16rpx;
+    line-height: 16rpx;    
+    margin-left: -34rpx;    
 }        
