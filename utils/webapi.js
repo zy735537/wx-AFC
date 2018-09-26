@@ -73,7 +73,7 @@ function getPersonRank(options) {
 //   success: function (res) { ... } 
 // }
 function getPageMatchesByPerson(options) {
-  options.url = data.getAPIUrl('/Game/GetPageMatchsByPerson')
+  options.url = data.getAPIUrl('/Game/GetPageMatchsByPerson2')
   call(options)
 }
 

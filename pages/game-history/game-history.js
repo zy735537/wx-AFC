@@ -100,18 +100,19 @@ Page({
     console.log(data)
     var overall = [];
     for (var i = 0; i < data.Items.length; ++i) {
-      if (data.Items[i].IconUrl != null) {
-        data.Items[i].IconUrl = globalData.getImageFullPath(data.Items[i].IconUrl)
-      } else {
-        data.Items[i].IconUrl = iconList.defaultUser
-      }
-
-      overall.push(data.Items[i].OverallA)
+      data.Items[i].PersonAIcon = globalData.getImageFullPath(data.Items[i].PersonAIcon);
+      data.Items[i].PersonA2Icon = globalData.getImageFullPath(data.Items[i].PersonA2Icon);
+      data.Items[i].PersonBIcon = globalData.getImageFullPath(data.Items[i].PersonBIcon);
+      data.Items[i].PersonB2Icon = globalData.getImageFullPath(data.Items[i].PersonB2Icon);
+      if (data.Items[i].OverallA > 0) {
+        overall.push(data.Items[i].OverallA)
+      }      
     }
 
     this.setData({ matchList : data.Items });    
-    this.initChart(overall);
+    this.initChart(overall.reverse());
   },
+
   getPersonRank: function () {
     var currentGameId = this.data.gameId
     var currentPersonId = this.data.personId

@@ -43,41 +43,35 @@
 <template name="match">
   <view class="match list-group-item rankItem" id="matchRow8148" data-match-id="8148" hidefocus="true">
       <view class="match-person-a">
-          <view class="user-icon name" data-person-id="1">
-              <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="Richard Zhang" class="rank userinfo-avatar person-1" src="{{IconUrl}}" alt="RZ" data-person-id="1" data-original-title="Richard Zhang"></image>
+          <view class="user-icon name" data-person-id="{{PersonAId}}">
+              <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="{{PersonAName}}" class="rank userinfo-avatar" src="{{PersonAIcon}}" alt="" data-person-id="{{PersonAId}}" data-original-title="{{PersonAName}}"></image>
 
-              <text class="badge person-1">RZ</text>
+              <text class="badge person-{{PersonAId}}">?</text>
 
-              <text class="overall me">388</text>
+              <text class="overall me">{{OverallA}}</text>
           </view>
 
-      <view class="user-icon name" data-person-id="16">
-        <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="Phoenix Zhong" class="rank userinfo-avatar person-16" src="{{IconUrl}}" alt="PZ" data-person-id="16" data-original-title="Phoenix Zhong"></image>
-        <text class="badge person-16">PZ</text>
-
-          <text class="overall ">510</text>
-
+      <view class="user-icon name" data-person-id="{{PersonA2Id}}">
+        <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="{{PersonAName2}}" class="rank userinfo-avatar" src="{{PersonA2Icon}}" alt="" data-person-id="{{PersonA2Id}}" data-original-title="{{PersonAName2}}"></image>
+        <text class="badge person-{{PersonA2Id}}">?</text>
+        <text class="overall ">{{OverallA2}}</text>
       </view>
       </view>
       <view class="match-score win" data-toggle="popover" title="" data-placement="top" data-content="">
-          <text class="score-a">10</text>
+          <text class="score-a">?</text>
           <text class="score-separator">-</text>
-          <text class="score-b">2</text>
+          <text class="score-b">?</text>
       </view>
       <view class="match-person-b">
-          <view class="user-icon name" data-person-id="12">
-              <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="Newstar Liu" class="rank userinfo-avatar person-12" src="{{IconUrl}}" alt="NL" data-person-id="12" data-original-title="Newstar Liu"></image>
-        
-              <text class="badge person-12">NL</text>
-
-                  <text class="overall ">364</text>
-
+          <view class="user-icon name" data-person-id="{{PersonBId}}">
+              <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="{{PersonBName}}" class="rank userinfo-avatar" src="{{PersonBIcon}}" alt="?" data-person-id="{{PersonBId}}" data-original-title="{{PersonBName}}"></image>        
+              <text class="badge  person-{{PersonBId}}">?</text>
+              <text class="overall ">{{OverallB}}</text>
           </view>
-      <view class="user-icon name" data-person-id="11">
-        <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="Zack Qiu" class="rank userinfo-avatar person-11" src="{{IconUrl}}" alt="ZQ" data-person-id="11" data-original-title="Zack Qiu"></image>
-        <text class="badge person-11">ZQ</text>
-
-        <text class="overall ">541</text>
+      <view class="user-icon name" data-person-id="{{PersonB2Id}}">
+        <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="{{PersonBName}}" class="rank userinfo-avatar person-11" src="{{PersonB2Icon}}" alt="?" data-person-id="11" data-original-title="{{PersonBName2}}"></image>
+        <text class="badge person-{{PersonB2Id}}">></text>
+        <text class="overall ">{{OverallB2}}</text>
       </view>
       </view>
   </view>

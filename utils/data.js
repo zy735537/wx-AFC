@@ -9,11 +9,17 @@ module.exports = {
   removeData: removeData
 }
 
+const iconList = require('icons.js')
+
 function getAPIUrl(relativePath) {
   return "https://www.activesports.top/AFC-Api/v1" + relativePath
 }
 
 function getImageFullPath(relativePath) {
+  if (relativePath == null || relativePath == '') {
+    return iconList.defaultUser;
+  }
+
   return 'https://www.activesports.top/' + relativePath;
 }
 
