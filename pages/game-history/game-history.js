@@ -17,8 +17,10 @@ Page({
     gameId: null,
     personId: null,
     pageNum : 1,
+    totalPage: null,
     itemsPerPage: globalData.getItemsPerPage(),
     matchList: [],
+    overall: [],
     myRank: { IconUrl: iconList.defaultUser },    
     ec: { lazyLoad: true }
   },
@@ -31,8 +33,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ gameId: options.gameId, personId: options.personId })     
-    this.loadData()
+    this.setData({ gameId: options.gameId, personId: options.personId });
+    this.loadData();
   },
 
   /**
@@ -67,7 +69,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh()
+    wx.stopPullDownRefresh()        
+    this.setData({ matchList: [], overall: [], pageNum: 1, totalPage: null }); // Init data
     this.loadData()
   },
 
@@ -75,7 +78,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    console.log('onReachBottom');
+    var currentPage = this.data.pageNum;
+    if (currentPage < this.data.totalPage) {
+      this.setData({ pageNum: currentPage + 1});
+      this.getMatchesByPage();
+    }    
   },
 
   /**
@@ -97,20 +105,22 @@ Page({
     }
   },
   loadMatchesByPage: function (data) {
-    console.log(data)
-    var overall = [];
+    console.log(data);    
     for (var i = 0; i < data.Items.length; ++i) {
       data.Items[i].PersonAIcon = globalData.getImageFullPath(data.Items[i].PersonAIcon);
       data.Items[i].PersonA2Icon = globalData.getImageFullPath(data.Items[i].PersonA2Icon);
       data.Items[i].PersonBIcon = globalData.getImageFullPath(data.Items[i].PersonBIcon);
       data.Items[i].PersonB2Icon = globalData.getImageFullPath(data.Items[i].PersonB2Icon);
       if (data.Items[i].OverallA > 0) {
-        overall.push(data.Items[i].OverallA)
+        this.data.overall.push(data.Items[i].OverallA);
       }      
     }
 
-    this.setData({ matchList : data.Items });    
-    this.initChart(overall.reverse());
+    var overallList =  util.cloneArray(this.data.overall);
+    var list = this.data.matchList.concat(data.Items);
+    this.setData({ matchList: list, pageNum: data.CurrentPage, totalPage: data.TotalPage });
+    console.log(this.data);
+    this.initChart(overallList.reverse());
   },
 
   getPersonRank: function () {
@@ -174,7 +184,7 @@ function setOption(chart, data) {
       x: 30,
       y: 10,
       x2: 30,
-      y2: 20
+      y2: 20      
     },
     tooltip: {
       show: true,

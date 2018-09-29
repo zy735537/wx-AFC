@@ -1,19 +1,10 @@
 <!--pages/game-history/game-history.wxml-->
 <main>
-  <view slot="header" class="gameinfo {{currentGame.Active ? '' : 'deactive'}}">
-    <!-- <image bindtap="bindViewTap" class="gameinfo-avatar" src="{{iconList.logoUrl}}" mode="cover"></image>   
-    <view class="name-detail">
-      <text class='title {{currentGame.Active ? "" : "deactive"}}'>{{currentGame.Name}}</text>
-      <text class='detail'>{{currentGame.begin_date}} - {{currentGame.end_date}}</text>      
-    </view>   
-    <view wx:if="{{!isAuthenticated}}" class='header-right'>
-      <text class='iconfont icon-people' bindtap='signInHandler'></text>        
-    </view>          -->
+  <view slot="header" class="user-info">
+    <template is="me" data="{{...myRank}}"/>  
   </view>
 
-  <view slot="content" class="content">    
-    <template is="me" data="{{...myRank}}"/>    
-
+  <view slot="content" class="content">
     <view class="chart-container">
       <ec-canvas id="chart-container" canvas-id="person-chart" ec="{{ ec }}"></ec-canvas>
     </view>
@@ -23,8 +14,10 @@
     </view>
   </view>
 
-  <view slot="footer">
-    <!-- <text class="user-motto">{{motto}}</text> -->
+  <view slot="footer">    
+    <view wx:if="{{pageNum == totalPage}}" class='no-data'>
+      <text> -  the end  - </text>
+    </view>    
   </view>
 </main>
 

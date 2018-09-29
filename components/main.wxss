@@ -12,6 +12,7 @@
   vertical-align: middle;
   position: fixed;
   height: 140rpx;
+  z-index: 100;
 }
 
 .content{

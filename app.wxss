@@ -323,3 +323,8 @@ button {
   color: #c1c1c1;  
   opacity: 0.5;
 }
+
+.no-data {
+  padding: 30rpx;
+  text-align: center;  
+}

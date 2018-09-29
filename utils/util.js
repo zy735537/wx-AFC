@@ -33,7 +33,21 @@ function getNumberSuffix(num) {
   }
 }
 
+function cloneArray(sourceArray) {
+  if (sourceArray == null) {
+    return [];
+  }
+
+  var resArray = [];
+  for (var i = 0; i < sourceArray.length; ++i) {
+    resArray.push(sourceArray[i]);
+  }
+
+  return resArray;
+}
+
 module.exports = {
   formatTime: formatTime,
-  getNumberSuffix: getNumberSuffix
+  getNumberSuffix: getNumberSuffix,
+  cloneArray: cloneArray
 }

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "ec-canvas": "/components/ec-canvas/ec-canvas"
+    "main": "/components/main",
+    "ec-canvas": "/components/ec-canvas/ec-canvas"    
   }
 }
