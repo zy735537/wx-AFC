@@ -37,33 +37,33 @@
   <view class="match list-group-item rankItem" id="matchRow8148" data-match-id="8148" hidefocus="true">
       <view class="match-person-a">
           <view class="user-icon name" data-person-id="{{PersonAId}}">
-              <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="{{PersonAName}}" class="rank userinfo-avatar" src="{{PersonAIcon}}" alt="" data-person-id="{{PersonAId}}" data-original-title="{{PersonAName}}"></image>
+              <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="{{PersonAName}}" class="rank userinfo-avatar" src="{{PersonAIcon}}" alt="{{BadgeA}}" data-person-id="{{PersonAId}}" data-original-title="{{PersonAName}}"></image>
 
-              <text class="badge person-{{PersonAId}}">?</text>
+              <text class="badge person-{{PersonAId}}">{{BadgeA}}</text>
 
               <text class="overall me">{{OverallA}}</text>
           </view>
 
       <view class="user-icon name" data-person-id="{{PersonA2Id}}">
-        <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="{{PersonAName2}}" class="rank userinfo-avatar" src="{{PersonA2Icon}}" alt="" data-person-id="{{PersonA2Id}}" data-original-title="{{PersonAName2}}"></image>
-        <text class="badge person-{{PersonA2Id}}">?</text>
+        <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="{{PersonAName2}}" class="rank userinfo-avatar" src="{{PersonA2Icon}}" alt="{{BadgeA2}}" data-person-id="{{PersonA2Id}}" data-original-title="{{PersonAName2}}"></image>
+        <text class="badge person-{{PersonA2Id}}">{{BadgeA2}}</text>
         <text class="overall ">{{OverallA2}}</text>
       </view>
       </view>
-      <view class="match-score win" data-toggle="popover" title="" data-placement="top" data-content="">
-          <text class="score-a">?</text>
+      <view class="match-score {{ScoreA > ScoreB ? 'win' : 'lose' }}" data-toggle="popover" title="" data-placement="top" data-content="">
+          <text class="score-a">{{ScoreA}}</text>
           <text class="score-separator">-</text>
-          <text class="score-b">?</text>
+          <text class="score-b">{{ScoreB}}</text>
       </view>
       <view class="match-person-b">
           <view class="user-icon name" data-person-id="{{PersonBId}}">
-              <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="{{PersonBName}}" class="rank userinfo-avatar" src="{{PersonBIcon}}" alt="?" data-person-id="{{PersonBId}}" data-original-title="{{PersonBName}}"></image>        
-              <text class="badge  person-{{PersonBId}}">?</text>
+              <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="{{PersonBName}}" class="rank userinfo-avatar" src="{{PersonBIcon}}" alt="{{BadgeB}}" data-person-id="{{PersonBId}}" data-original-title="{{PersonBName}}"></image>        
+              <text class="badge  person-{{PersonBId}}">{{BadgeB}}</text>
               <text class="overall ">{{OverallB}}</text>
           </view>
       <view class="user-icon name" data-person-id="{{PersonB2Id}}">
-        <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="{{PersonBName}}" class="rank userinfo-avatar person-11" src="{{PersonB2Icon}}" alt="?" data-person-id="11" data-original-title="{{PersonBName2}}"></image>
-        <text class="badge person-{{PersonB2Id}}">></text>
+        <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="{{PersonBName}}" class="rank userinfo-avatar person-11" src="{{PersonB2Icon}}" alt="{{BadgeB2}}" data-person-id="11" data-original-title="{{PersonBName2}}"></image>
+        <text class="badge person-{{PersonB2Id}}">{{BadgeB2}}</text>
         <text class="overall ">{{OverallB2}}</text>
       </view>
       </view>

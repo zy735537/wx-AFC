@@ -70,7 +70,8 @@ function getPersonRank(options) {
 
 // options: { 
 //   data: { gameId: 7, personId: 1, pageNum = 1, itemsPerPage = 20 },
-//   success: function (res) { ... } 
+//   success: function (res) { ... },
+//   loading: { title: 'loading...' }
 // }
 function getPageMatchesByPerson(options) {
   options.url = data.getAPIUrl('/Game/GetPageMatchsByPerson2')
@@ -78,7 +79,7 @@ function getPageMatchesByPerson(options) {
 }
 
 function call(options) {
-  loading.show();
+  loading.show(options.loading);
 
   wx.request({
     url: options.url,

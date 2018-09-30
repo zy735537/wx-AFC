@@ -130,7 +130,7 @@ ec-canvas {
     background-color: #d7d7d7;
     border: 1px solid #d7d7d7;
     border-radius: 6rpx;
-    width: 26rpx;
+    width: 30rpx;
     height: 16rpx;
     padding: 4rpx;
     font-size: 16rpx;

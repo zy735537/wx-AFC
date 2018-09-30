@@ -16,7 +16,7 @@
       <template is="me" data="{{...myRank}}"/>
     </view>
 
-    <view wx:for="{{rankList}}">
+    <view wx:for="{{rankList}}"  wx:key="Rank">
       <template is="rankItem" data="{{...item}}"/>
     </view>
   </view>

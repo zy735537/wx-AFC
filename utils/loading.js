@@ -1,10 +1,18 @@
+const util = require('util.js')
+
 var count = 0;
 
-function show() {
+const defaultOptions = { title: "loading", mask: false };
+
+/*
+options: { title: 'data loading...' }
+*/
+function show(options) {
   count++
-  if (count == 1) {           
-    wx.showLoading({title: "loading", mask: false})
-  }    
+  if (count == 1) {      
+    var option = util.extend(defaultOptions, options);
+    wx.showLoading(option);
+  }
 }
 
 function hide(completeHandler) {

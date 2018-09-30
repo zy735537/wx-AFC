@@ -12,7 +12,8 @@ module.exports = {
 const iconList = require('icons.js')
 
 function getAPIUrl(relativePath) {
-  return "https://www.activesports.top/AFC-Api/v1" + relativePath
+  return "https://www.activesports.top/AFC-Api/v1" + relativePath;
+  //return "https://www.activesports.top/API-TEST/v1" + relativePath;
 }
 
 function getImageFullPath(relativePath) {
@@ -24,7 +25,7 @@ function getImageFullPath(relativePath) {
 }
 
 function getItemsPerPage() {
-  return 20
+  return 20;
 }
 
 function getAuthKey() {

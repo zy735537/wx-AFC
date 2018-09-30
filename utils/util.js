@@ -46,8 +46,18 @@ function cloneArray(sourceArray) {
   return resArray;
 }
 
+// function cloneObj(sourceObj) {
+//   //return Object.assign({}, sourceObj);
+//   return JSON.parse(JSON.stringify(sourceObj));
+// }
+
+function extend(obj1, obj2) {  
+  return Object.assign({}, obj1, obj2);
+}
+
 module.exports = {
   formatTime: formatTime,
   getNumberSuffix: getNumberSuffix,
-  cloneArray: cloneArray
+  cloneArray: cloneArray,  
+  extend: extend
 }

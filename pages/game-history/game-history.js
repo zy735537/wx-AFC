@@ -16,7 +16,7 @@ Page({
   data: {
     gameId: null,
     personId: null,
-    pageNum : 1,
+    pageNum : 0,
     totalPage: null,
     itemsPerPage: globalData.getItemsPerPage(),
     matchList: [],
@@ -70,7 +70,7 @@ Page({
    */
   onPullDownRefresh: function () {
     wx.stopPullDownRefresh()        
-    this.setData({ matchList: [], overall: [], pageNum: 1, totalPage: null }); // Init data
+    this.setData({ matchList: [], overall: [], pageNum: 0, totalPage: null }); // Init data
     this.loadData()
   },
 
@@ -80,8 +80,7 @@ Page({
   onReachBottom: function () {
     console.log('onReachBottom');
     var currentPage = this.data.pageNum;
-    if (currentPage < this.data.totalPage) {
-      this.setData({ pageNum: currentPage + 1});
+    if (currentPage < this.data.totalPage) {      
       this.getMatchesByPage();
     }    
   },
@@ -98,14 +97,17 @@ Page({
     var currentPersonId = this.data.personId
     var currentPageNum = this.data.pageNum
     if (currentGameId != null && currentPersonId != null) {
+      var fetchPagenum = currentPageNum + 1; 
+      var loadingTitle = "loading (" + fetchPagenum + "/" + this.data.totalPage + ")";
       api.getPageMatchesByPerson({
-        data: { gameId: currentGameId, personId: currentPersonId, pageNum: currentPageNum, itemsPerPage: this.data.itemsPerPage },
-        success: this.loadMatchesByPage
+        data: { gameId: currentGameId, personId: currentPersonId, pageNum: fetchPagenum, itemsPerPage: this.data.itemsPerPage },
+        success: this.loadMatchesByPage,
+        loading: { title: loadingTitle }
       })
     }
   },
   loadMatchesByPage: function (data) {
-    console.log(data);    
+    console.log(data);
     for (var i = 0; i < data.Items.length; ++i) {
       data.Items[i].PersonAIcon = globalData.getImageFullPath(data.Items[i].PersonAIcon);
       data.Items[i].PersonA2Icon = globalData.getImageFullPath(data.Items[i].PersonA2Icon);
