@@ -330,9 +330,13 @@ button {
 }
 
 .win {
-    color: green;
+  color: green;
 }
 
 .lose {
-    color: red;
+  color: red;
+}
+
+.unconfirmed {
+  color: #ccc;
 }
