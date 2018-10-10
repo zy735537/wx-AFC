@@ -5,6 +5,8 @@ const globalData = require('../../utils/data.js')
 const iconList = require('../../utils/icons.js')
 const util = require('../../utils/util.js')
 const api = require('../../utils/webapi.js')
+const session = require('../../utils/session.js')
+const loading = require('../../utils/loading.js')
 
 var app = getApp();
 
@@ -20,6 +22,7 @@ Page({
     totalPage: null,
     itemsPerPage: globalData.getItemsPerPage(),
     matchList: [],
+    groupedMatchList: [],
     overall: [],
     myRank: { IconUrl: iconList.defaultUser },    
     ec: { lazyLoad: true }
@@ -70,7 +73,7 @@ Page({
    */
   onPullDownRefresh: function () {
     wx.stopPullDownRefresh()        
-    this.setData({ matchList: [], overall: [], pageNum: 0, totalPage: null }); // Init data
+    this.setData({ matchList: [], groupedMatchList: [], overall: [], pageNum: 0, totalPage: null }); // Init data
     this.loadData()
   },
 
@@ -107,12 +110,38 @@ Page({
     }
   },
   loadMatchesByPage: function (data) {
-    console.log(data);
+    //console.log(data);
+    var addToGroupedMatchList = function (groupedList, item){
+      var group;
+      if (group == null) {
+        for (var i = 0; i < groupedList.length; ++i) {
+          if (groupedList[i].name == item.groupBy) {
+            group = groupedList[i];
+            break;
+          }
+        }
+
+        if (group == null) {
+          group = { name: item.groupBy, items: [] };
+          groupedList.push(group);
+        }
+      }
+
+      group.items.push(item);
+    };
+
+    var currentPersonId = session.getPersonId();
     for (var i = 0; i < data.Items.length; ++i) {
       data.Items[i].PersonAIcon = globalData.getImageFullPath(data.Items[i].PersonAIcon);
       data.Items[i].PersonA2Icon = globalData.getImageFullPath(data.Items[i].PersonA2Icon);
       data.Items[i].PersonBIcon = globalData.getImageFullPath(data.Items[i].PersonBIcon);
       data.Items[i].PersonB2Icon = globalData.getImageFullPath(data.Items[i].PersonB2Icon);
+
+      data.Items[i].CanBeRemoved = data.Items[i].CanBeRemovedBy.indexOf(currentPersonId) >= 0;
+      data.Items[i].CanBeConfirmed = data.Items[i].CanBeConfirmedBy.indexOf(currentPersonId) >= 0;
+      data.Items[i].groupBy = util.formatTime(new Date(data.Items[i].Date));
+      addToGroupedMatchList(this.data.groupedMatchList, data.Items[i]);
+
       if (data.Items[i].OverallA > 0) {
         this.data.overall.push(data.Items[i].OverallA);
       }      
@@ -120,11 +149,11 @@ Page({
 
     var overallList =  util.cloneArray(this.data.overall);
     var list = this.data.matchList.concat(data.Items);
-    this.setData({ matchList: list, pageNum: data.CurrentPage, totalPage: data.TotalPage });
+    this.setData({ matchList: list, groupedMatchList: this.data.groupedMatchList, pageNum: data.CurrentPage, totalPage: data.TotalPage });
     console.log(this.data);
     this.initChart(overallList.reverse());
   },
-
+  
   getPersonRank: function () {
     var currentGameId = this.data.gameId
     var currentPersonId = this.data.personId
@@ -160,7 +189,34 @@ Page({
       setOption(chart, data);
       return chart;
     });
-  }
+  },
+  removeHandler: function (event) {
+    var matchId = event.currentTarget.id;
+    wx.showModal({
+      title: 'Confirmation' + matchId,
+      content: 'Remove this mathch. Are you sure?',
+      success: function(res) {
+        if (res.confirm) {
+          api.removeMatch({
+            data: { matchId: matchId },
+            success: function () {
+              
+              }
+            });
+        }        
+      }
+    });
+  },
+  confirmHandler: function (event) {
+    var matchId = event.currentTarget.id;
+    wx.showModal({
+      title: 'Confirmation' + matchId,
+      content: 'To confirm this mathch. Are you sure?',
+      success: function (res) {
+        loading.showError(res.confirm);
+      }
+    });
+  },
 });
 
 function setOption(chart, data) {

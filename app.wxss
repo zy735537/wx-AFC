@@ -188,6 +188,10 @@ button {
   font-size: 50rpx;
 }
 
+.group {  
+  display: block;
+}
+
 .rankList{
   display: flex;
   align-items: center;
@@ -339,4 +343,16 @@ button {
 
 .unconfirmed {
   color: #ccc;
+}
+
+.action-icon {
+  font-size: 100rpx;
+}
+
+.remove {
+  color: #F9B82E;
+}
+
+.confirm {
+  color: #00CC00;
 }

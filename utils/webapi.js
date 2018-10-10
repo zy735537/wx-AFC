@@ -2,11 +2,14 @@ module.exports = {
   signIn: signIn,
   getRankList: getRankList,
   getPersonRank: getPersonRank,
-  getPageMatchesByPerson: getPageMatchesByPerson
+  getPageMatchesByPerson: getPageMatchesByPerson,
+  confirmMatch: confirmMatch,
+  removeMatch: removeMatch
 }
 
 const data = require('data.js')
 const loading = require('loading.js')
+const session = require('session.js')
 
 var log2Console = true;
 
@@ -74,7 +77,37 @@ function getPersonRank(options) {
 //   loading: { title: 'loading...' }
 // }
 function getPageMatchesByPerson(options) {
-  options.url = data.getAPIUrl('/Game/GetPageMatchsByPerson2')
+  options.url = data.getAPIUrl('/Game/GetPageMatchsByPerson2');    
+  call(options)
+}
+
+// options: { 
+//   data: { matchId: 7 },
+//   success: function (res) { ... },
+//   loading: { title: 'loading...' }
+// }
+function confirmMatch(options) {
+  options.url = data.getAPIUrl('/Game/ConfirmMatch');
+  options.header = {
+    'content-type': 'application/json',
+    'Authorization': "Basic " + session.getToken()
+  };
+    
+  call(options)
+}
+
+// options: { 
+//   data: { matchId: 7 },
+//   success: function (res) { ... },
+//   loading: { title: 'loading...' }
+// }
+function removeMatch(options) {
+  options.url = data.getAPIUrl('/Game/RemoveMatch');
+  options.header = {
+    'content-type': 'application/json',
+    'Authorization': "Basic " + session.getToken()
+  };
+
   call(options)
 }
 
@@ -113,7 +146,13 @@ function call(options) {
       
       if (e.statusCode != 200) {
         loading.hide(function () {
-          loading.showError(e.data.Message)
+          if (e.statusCode == 401) {
+            wx.navigateTo({
+              url: '../signin/signin'
+            });
+          } else {
+            loading.showError(e.data.Message);
+          }                    
         })
       } else {
         if (options.success != null) {

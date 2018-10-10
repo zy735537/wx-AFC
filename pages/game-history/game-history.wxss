@@ -108,21 +108,26 @@ ec-canvas {
         font-size: 14px;
     }
 
+    .match-score .score {
+      display: inline-block;
+    }
+
     .match-score .score-a,
     .match-score .score-b,
     .match-score .score-separator {
-        display: table-cell;
-        text-align: center;
+        display: table-cell;        
     }
 
     .match-score .score-a,
     .match-score .score-b {         
-        min-width: 15px;
+        min-width: 36rpx;
     }
 
-        .match-score .score-separator {
-            min-width: 10px;
-        }
+    .match-score .score-separator {
+        min-width: 10px;
+        text-align: center;
+        padding: 0 5rpx;
+    }
 
 .user-icon text.badge {  
     position: absolute;    

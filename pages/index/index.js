@@ -11,7 +11,7 @@ Page({
   data: {    
     rankList: [],
     myRank: { IconUrl: iconList.defaultUser },
-    currentGame: { "GameId": 7, "Name": "Foosball Season 6", "Type": 1, "Create_Time": "\/Date(1533036461000)\/", "begin_date": 1533081600000, "end_date": 1538351940000, "Active": true, "Icon": "/AFC/images/foosball.jpg", "Deleted": false }
+    currentGame: { "GameId": 10, "Name": "Season Oct-Nov", "Type": 1, "Create_Time": "\/Date(1533036461000)\/", "begin_date": 1533081600000, "end_date": 1538351939999, "Active": true, "Icon": "/AFC/images/foosball.jpg", "Deleted": false }
   },
   //事件处理函数
   signInHandler: function() {
@@ -61,7 +61,7 @@ Page({
   },
   getRankList: function () {
     api.getRankList({ 
-      data: {gameId: 7},       
+      data: {gameId: 10},       
       success: this.loadRankList
     })
   },
