@@ -10,10 +10,12 @@
     </view>
 
     <view wx:for="{{groupedMatchList}}" wx:for-item="group">
-      <text class='group title'>{{ group.name }}</text>   
-      <view wx:for="{{group.items}}">
-        <template is="match" data="{{...item}}"/>
-      </view>         
+      <block wx:if="{{group.items.length > 0}}">
+        <text class='group title'>{{ group.name }}</text>   
+        <view wx:for="{{group.items}}">
+          <template is="match" data="{{...item}}"/>
+        </view>         
+      </block>
     </view>
   </view>
 

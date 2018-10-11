@@ -20,8 +20,7 @@ Page({
     personId: null,
     pageNum : 0,
     totalPage: null,
-    itemsPerPage: globalData.getItemsPerPage(),
-    matchList: [],
+    itemsPerPage: globalData.getItemsPerPage(),    
     groupedMatchList: [],
     overall: [],
     myRank: { IconUrl: iconList.defaultUser },    
@@ -73,7 +72,7 @@ Page({
    */
   onPullDownRefresh: function () {
     wx.stopPullDownRefresh()        
-    this.setData({ matchList: [], groupedMatchList: [], overall: [], pageNum: 0, totalPage: null }); // Init data
+    this.setData({ groupedMatchList: [], overall: [], pageNum: 0, totalPage: null }); // Init data
     this.loadData()
   },
 
@@ -147,9 +146,8 @@ Page({
       }      
     }
 
-    var overallList =  util.cloneArray(this.data.overall);
-    var list = this.data.matchList.concat(data.Items);
-    this.setData({ matchList: list, groupedMatchList: this.data.groupedMatchList, pageNum: data.CurrentPage, totalPage: data.TotalPage });
+    var overallList =  util.cloneArray(this.data.overall);    
+    this.setData({ groupedMatchList: this.data.groupedMatchList, pageNum: data.CurrentPage, totalPage: data.TotalPage });
     console.log(this.data);
     this.initChart(overallList.reverse());
   },
@@ -192,31 +190,79 @@ Page({
   },
   removeHandler: function (event) {
     var matchId = event.currentTarget.id;
+    var matchRemovedUpdate = this.matchRemovedUpdate;    
     wx.showModal({
-      title: 'Confirmation' + matchId,
-      content: 'Remove this mathch. Are you sure?',
+      title: 'Confirmation',
+      content: 'Remove this match. Are you sure?',
       success: function(res) {
         if (res.confirm) {
           api.removeMatch({
             data: { matchId: matchId },
             success: function () {
-              
-              }
-            });
+              matchRemovedUpdate(matchId);
+            }
+          });
         }        
       }
     });
   },
   confirmHandler: function (event) {
     var matchId = event.currentTarget.id;
+    var matchConfirmedUpdate = this.matchConfirmedUpdate;
     wx.showModal({
-      title: 'Confirmation' + matchId,
-      content: 'To confirm this mathch. Are you sure?',
+      title: 'Confirmation',
+      content: 'To confirm this match. Are you sure?',
       success: function (res) {
-        loading.showError(res.confirm);
+        if (res.confirm) {
+          api.confirmMatch({
+            data: { matchId: matchId },
+            success: function () {
+              matchConfirmedUpdate(matchId);
+            }
+          });
+        }  
       }
     });
   },
+  matchRemovedUpdate: function (matchId) {
+    var groupedList = this.data.groupedMatchList;
+    var removed = false;
+    for (var i = 0; i < groupedList.length; ++i) {
+      if (removed)
+        break;
+
+      var group = groupedList[i];
+      for (var j = 0; j < group.items.length; ++j) {
+        if (matchId == group.items[j].MatchId) {                                         
+          group.items.splice(j, 1);          
+          removed = true;
+          break;
+        }        
+      };
+    };
+     
+    this.setData({ groupedMatchList: groupedList });
+  },
+  matchConfirmedUpdate: function (matchId) {
+    var groupedList = this.data.groupedMatchList;
+    var updated = false;
+    for (var i = 0; i < groupedList.length; ++i) {
+      if (updated)
+        break;
+
+      var group = groupedList[i];
+      for (var j = 0; j < group.items.length; ++j) {
+        if (matchId == group.items[j].MatchId) {
+          group.items[j].HasConfirmed = true;
+          group.items[j].CanBeConfirmed = false;          
+          updated = true;
+          break;
+        }
+      };
+    };
+
+    this.setData({ groupedMatchList: groupedList });
+  }
 });
 
 function setOption(chart, data) {
