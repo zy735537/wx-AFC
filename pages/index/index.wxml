@@ -5,15 +5,15 @@
     <view class="name-detail">
       <text class='title {{currentGame.Active ? "" : "deactive"}}'>{{currentGame.Name}}</text>
       <text class='detail'>{{currentGame.begin_date}} - {{currentGame.end_date}}</text>      
-    </view>   
-    <view wx:if="{{!isAuthenticated}}" class='header-right'>
-      <text class='iconfont icon-people' bindtap='signInHandler'></text>        
-    </view>         
+    </view>
   </view>
 
   <view slot="content" class="content">
     <view wx:if="{{isAuthenticated}}">
       <template is="me" data="{{...myRank}}"/>
+    </view>
+    <view wx:else class='sign-in-container'>
+      <button class='sign-in' bindtap="signInHandler"> Sign in </button>
     </view>
 
     <view wx:for="{{rankList}}"  wx:key="Rank">
@@ -38,14 +38,12 @@
   </view>
 </template>
 
-<template name="me">
+<template name="me">    
   <view class='person-rank rankItem row' data-game-id="{{GameId}}" data-person-id="{{PersonId}}">    
     <text class='rank item col-4' data-suffix='{{rankSuffix}}'>{{Rank}}</text>    
     <view class="name-detail item col-4">
-      <image class="userinfo-avatar me item" src="{{IconUrl}}" mode="cover"></image>      
-      <!-- <text class='name'>{{FirstName}} {{LastName}}</text>
-      <text class='detail'>Win {{Win}} Lose {{Lose}} NP {{NetPoint}}</text> -->
+      <image class="userinfo-avatar me item" src="{{IconUrl}}" mode="cover"></image>
     </view>    
     <text class="overall item col-4" data-suffix='pts'>{{Overall}}</text>
-  </view>
+  </view>    
 </template>

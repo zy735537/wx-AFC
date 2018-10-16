@@ -285,9 +285,9 @@ function setOption(chart, data) {
     },
     grid: {
       containLabel: false,
-      x: 30,
+      x: 4,
       y: 10,
-      x2: 30,
+      x2: 3,
       y2: 20      
     },
     tooltip: {
@@ -324,6 +324,21 @@ function setOption(chart, data) {
       },
       itemStyle: {
         color: '#F9B82E',
+      },
+      areaStyle: {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [{
+            offset: 0, color: '#000' // 0% 处的颜色
+          }, {
+              offset: 1, color: '#F2F2F2' // 100% 处的颜色
+          }],
+          globalCoord: false // 缺省为 false
+        }
       },
       data: data
     }]
