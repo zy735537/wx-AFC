@@ -1,12 +1,12 @@
 <!--pages/game-history/game-history.wxml-->
 <main>
   <view slot="header" class="user-info">
-    <template is="me" data="{{...myRank}}"/>  
+    <template is="me" data="{{...myRank}}"/>      
   </view>
 
   <view slot="content" class="content">
-    <view class="chart-container">
-      <ec-canvas id="chart-container" canvas-id="person-chart" ec="{{ ec }}"></ec-canvas>
+    <view class="chart-container">      
+      <ec-canvas id="chart-container" canvas-id="person-chart" ec="{{ ec }}"></ec-canvas>      
     </view>
 
     <view wx:for="{{groupedMatchList}}" wx:for-item="group">
@@ -39,7 +39,7 @@
 </template>
 
 <template name="match">
-  <view class="match list-group-item rankItem" id="matchRow8148" data-match-id="8148" hidefocus="true">
+  <view class="match list-group-item rankItem" id="matchRow{{MatchId}}" data-match-id="{{MatchId}}" hidefocus="true">
       <view class="match-person-a">
           <view class="user-icon name" data-person-id="{{PersonAId}}">
               <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="{{PersonAName}}" class="rank userinfo-avatar" src="{{PersonAIcon}}" alt="{{BadgeA}}" data-person-id="{{PersonAId}}" data-original-title="{{PersonAName}}"></image>
