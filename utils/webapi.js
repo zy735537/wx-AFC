@@ -1,5 +1,7 @@
 module.exports = {
   signIn: signIn,
+  getDefaultGame: getDefaultGame,
+  getAllGames: getAllGames,
   getRankList: getRankList,
   getPersonRank: getPersonRank,
   getPageMatchesByPerson: getPageMatchesByPerson,
@@ -27,6 +29,22 @@ const defaultOptions = {
 function signIn(options) {
   options.url = data.getAPIUrl('/Account/Login')
   options.method = "POST"
+  call(options)
+}
+
+// options: { 
+//   success: function (res) { ... } 
+// }
+function getAllGames(options) {
+  options.url = data.getAPIUrl('/Game/GetAllGames')
+  call(options)
+}
+
+// options: { 
+//   success: function (res) { ... } 
+// }
+function getDefaultGame(options) {
+  options.url = data.getAPIUrl('/Game/GetDefaultGame')
   call(options)
 }
 

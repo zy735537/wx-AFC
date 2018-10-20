@@ -1,11 +1,13 @@
 <!--index.wxml-->
 <main>
-  <view slot="header" class="gameinfo {{currentGame.Active ? '' : 'deactive'}}">
-    <image bindtap="bindViewTap" class="gameinfo-avatar" src="{{iconList.logoUrl}}" mode="cover"></image>   
+  <view slot="header" class="gameinfo {{currentGame.Active ? '' : 'deactive'}}">  
+    <picker class='' bindchange="gamePickerChange" range="{{gameList}}" range-key='Name'>
+      <image bindtap="bindViewTap" class="gameinfo-avatar" src="{{iconList.logoUrl}}" mode="cover"></image>   
+    </picker>
     <view class="name-detail">
       <text class='title {{currentGame.Active ? "" : "deactive"}}'>{{currentGame.Name}}</text>
-      <text class='detail'>{{currentGame.begin_date}} - {{currentGame.end_date}}</text>      
-    </view>
+      <text class='detail'>{{currentGame.begin_date == null ? 'long long ago' : currentGame.begin_date}} - {{currentGame.end_date == null ? 'long long after' : currentGame.end_date}}</text>      
+    </view>    
   </view>
 
   <view slot="content" class="content">

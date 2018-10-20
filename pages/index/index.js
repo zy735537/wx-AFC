@@ -10,14 +10,27 @@ const globalData = require('../../utils/data.js')
 Page({
   data: {    
     rankList: [],
-    myRank: { IconUrl: iconList.defaultUser },
-    currentGame: { "GameId": 10, "Name": "Season Oct-Nov", "Type": 1, "Create_Time": "\/Date(1533036461000)\/", "begin_date": 1533081600000, "end_date": 1538351939999, "Active": true, "Icon": "/AFC/images/foosball.jpg", "Deleted": false }
+    gameList: [],
+    myRank: { IconUrl: iconList.defaultUser },    
+    currentGame: { "GameId": null, "Name": "Loading", "Type": 1 }
   },
   //事件处理函数
   signInHandler: function() {
     wx.navigateTo({
       url: '../signin/signin'
     })
+  },
+  formatDate: function(date) {
+    if (date == null)
+      return null;
+
+    return util.formatTime(new Date(date));
+  },
+  gamePickerChange: function(e) {
+    var selectedGame = this.data.gameList[e.detail.value];
+    this.setData({ currentGame: selectedGame });   
+    session.setGameId(selectedGame.GameId);    
+    this.loadAllData();
   },
   playerItemTab: function (event) {
     var gameId = event.currentTarget.dataset.gameId
@@ -28,22 +41,66 @@ Page({
     })
   },
   onPullDownRefresh: function() {    
-    wx.stopPullDownRefresh()
-    this.getRankList()
-    this.getPersonRank()
+    wx.stopPullDownRefresh();
+    this.loadAllData();
   },
-  onLoad: function () {        
+  onLoad: function () {   
     this.setData({ iconList: iconList });
-    this.setData({ 'currentGame.begin_date': util.formatTime(new Date(this.data.currentGame.begin_date)) })
-    this.setData({ 'currentGame.end_date': util.formatTime(new Date(this.data.currentGame.end_date)) })
-
-    this.getRankList()
-    this.getPersonRank()
+    var currentGameId = session.getGameId();
+    if (currentGameId == null) {
+      this.getDefaultGame();
+    } else {      
+      this.loadAllData();
+    }    
   },
   onShow: function() {
     this.setData({ isAuthenticated: session.isAuthenticated() });
     this.setData({ currentPersonId: session.getPersonId() });
   },
+  loadAllData: function () {
+    this.getGameList();
+    this.getRankList();
+    this.getPersonRank();    
+  },
+  loadDefaultGame: function (data) {
+    console.log(data);
+    if (data != null) {
+      session.setGameId(data.Id);
+      this.loadAllData();
+    } else {
+
+    }
+  },
+  getDefaultGame: function () {
+    api.getDefaultGame({
+      success: this.loadDefaultGame
+    })
+  },    
+  loadGameList: function (data) {    
+    var activeGames = [];
+    var curGame = null;
+    for (var i = 0; i < data.length; i++) {      
+      data[i].begin_date = this.formatDate(data[i].begin_date);
+      data[i].end_date = this.formatDate(data[i].end_date);      
+      if (data[i].Active) {                   
+        activeGames.push(data[i]);
+      }
+
+      if (data[i].GameId == session.getGameId()) {
+        curGame = data[i];
+      }
+    } 
+    
+    this.setData({
+      gameList: activeGames,
+      currentGame: curGame
+    })
+  },
+  getGameList: function () {
+    api.getAllGames({      
+      success: this.loadGameList
+    })
+  },  
   loadRankList: function (data) {
     for (var i = 0; i < data.length; ++i) {    
       if (data[i].IconUrl != null) {
@@ -54,14 +111,14 @@ Page({
 
       data[i].Me = data[i].PersonId == this.data.currentPersonId           
     }
-    
+    console.log(data);
     this.setData({
       rankList: data
     })    
   },
   getRankList: function () {
     api.getRankList({ 
-      data: {gameId: 10},       
+      data: { gameId: session.getGameId()},       
       success: this.loadRankList
     })
   },
