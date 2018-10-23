@@ -1,12 +1,12 @@
 <!--components/main.wxml-->
-<view class='container'>
+<view class='container'>  
   <view class="header">  
     <slot name="header"></slot>
   </view>  
-  <view class="content">
+  <view class="content {{showFooter ? '' : 'no-footer' }}">
     <slot name="content"></slot>
   </view>
-  <view class="footer">
+  <view class="footer" wx:if="{{showFooter}}">
     <slot name="footer"></slot>
   </view>
 </view>
