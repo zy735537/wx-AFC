@@ -66,7 +66,12 @@ Page({
   onUnload: function () {
 
   },
-
+  scrollToTop: function() {
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 300
+    });
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

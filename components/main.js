@@ -7,7 +7,7 @@ Component({
    * Component properties
    */
   properties: {
-
+    showFooter: Boolean 
   },
 
   /**

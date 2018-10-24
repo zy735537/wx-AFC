@@ -1,4 +1,6 @@
 <!--pages/game-history/game-history.wxml-->
+<set-tab-bar bindunmount="leaveSetTabBarPage"></set-tab-bar>
+
 <main>
   <view slot="header" class="user-info">
     <template is="me" data="{{...myRank}}"/>      
@@ -16,10 +18,14 @@
           <template is="match" data="{{...item}}"/>
         </view>         
       </block>
-    </view>
+    </view>   
   </view>
 
   <view slot="footer">    
+    <view wx:if="{{pageNum > 1 }}">
+      <text bindtap="scrollToTop"> - Back to TOP  - </text>
+    </view>   
+
     <view wx:if="{{pageNum == totalPage}}" class='no-data'>
       <text> -  the end  - </text>
     </view>    

@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<main>
+<main showFooter='{{true}}'>
   <view slot="header" class="gameinfo {{currentGame.Active ? '' : 'deactive'}}">  
     <picker class='' bindchange="gamePickerChange" range="{{gameList}}" range-key='Name'>
       <image bindtap="bindViewTap" class="gameinfo-avatar" src="{{iconList.logoUrl}}" mode="cover"></image>   
@@ -23,9 +23,12 @@
     </view>
   </view>
 
-  <view slot="footer">
-    <!-- <text class="user-motto">{{motto}}</text> -->
-  </view>
+  <block wx:if="{{false}}">
+    <view slot="footer" >
+      <!-- <text class="user-motto">{{motto}}</text> -->
+      <image class="" style='height: 50rpx; width: 50rpx;' src="{{iconList.NO1}}" mode="cover"></image>
+    </view>
+  </block>
 </main>
 
 <template name="rankItem">
