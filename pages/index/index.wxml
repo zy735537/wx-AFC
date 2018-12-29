@@ -23,10 +23,16 @@
     </view>
   </view>
 
-  <block wx:if="{{false}}">
+  <block wx:if="{{true}}">
     <view slot="footer" >
-      <!-- <text class="user-motto">{{motto}}</text> -->
-      <image class="" style='height: 50rpx; width: 50rpx;' src="{{iconList.NO1}}" mode="cover"></image>
+      <view style='width: 100%; text-align: center;'>
+        <navigator
+            url="../match/add"
+            open-type="navigate"
+            hover-class="other-navigator-hover">
+            <text class='iconfont icon-add' bindtap='' style="font-size: 90rpx;"></text>
+          </navigator>        
+      </view>      
     </view>
   </block>
 </main>

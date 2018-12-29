@@ -31,7 +31,7 @@ ec-canvas {
 }
 
 /* Match items */
-.match {
+/* .match {
     display: table;
     text-align: center;    
     width: 100%;    
@@ -140,4 +140,4 @@ ec-canvas {
     font-size: 16rpx;
     line-height: 16rpx;    
     margin-left: -34rpx;    
-}        
+}         */
