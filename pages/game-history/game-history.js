@@ -338,9 +338,9 @@ function setOption(chart, data) {
           x2: 0,
           y2: 1,
           colorStops: [{
-            offset: 0, color: '#000' // 0% 处的颜色
+            offset: 0, color: '#515151' // 0% 处的颜色
           }, {
-              offset: 1, color: '#F2F2F2' // 100% 处的颜色
+            offset: 1, color: '#363636' // 100% 处的颜色
           }],
           globalCoord: false // 缺省为 false
         }

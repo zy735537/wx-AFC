@@ -1,22 +1,22 @@
 /* pages/game-history/game-history.wxss */
-.user-info {
+.user-info {  
   /* display: flex;
   flex-direction: row;
   align-items: flex-start;
   vertical-align: middle;
-  padding: 10rpx 30rpx;     */
-  z-index: 100;
+  padding: 10rpx 30rpx; */  
 }
 
 ec-canvas {
   width: 100%;
   height: 100%;
-  /* background-color: #363636; */
-  background-color: #fff;
 }
 
 .chart-container {  
   height:500rpx;  
+  width: 100%;
+  /* background-color: #fff;   */
+  background-color: #363636;
   /* top: 0;
   bottom: 0;
   left: 0;
@@ -27,12 +27,11 @@ ec-canvas {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  box-sizing: border-box; */
-  width: 100%;  
+  box-sizing: border-box; */  
 }
 
 /* Match items */
-.match {
+/* .match {
     display: table;
     text-align: center;    
     width: 100%;    
@@ -141,4 +140,4 @@ ec-canvas {
     font-size: 16rpx;
     line-height: 16rpx;    
     margin-left: -34rpx;    
-}        
+}         */

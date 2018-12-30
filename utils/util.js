@@ -33,6 +33,19 @@ function getNumberSuffix(num) {
   }
 }
 
+function getBadge(firstName, lastName) {
+  var badge = "";
+  if (firstName != null && firstName.length > 0) {
+    badge = firstName.substr(0, 1);
+  }
+
+  if (lastName != null && lastName.length > 0) {
+    badge += lastName.substr(0, 1);
+  }
+
+  return badge.length > 0 ? badge : "--";
+}
+
 function cloneArray(sourceArray) {
   if (sourceArray == null) {
     return [];
@@ -46,11 +59,6 @@ function cloneArray(sourceArray) {
   return resArray;
 }
 
-// function cloneObj(sourceObj) {
-//   //return Object.assign({}, sourceObj);
-//   return JSON.parse(JSON.stringify(sourceObj));
-// }
-
 function extend(obj1, obj2) {  
   return Object.assign({}, obj1, obj2);
 }
@@ -58,6 +66,7 @@ function extend(obj1, obj2) {
 module.exports = {
   formatTime: formatTime,
   getNumberSuffix: getNumberSuffix,
+  getBadge: getBadge,
   cloneArray: cloneArray,  
   extend: extend
 }

@@ -1,0 +1,52 @@
+/* pages/match/add.wxss */
+.rankItem {
+  background-color: transparent;
+}
+
+.player-select-section,
+.score-select-section {
+  /* background-color: #fff; */
+  padding: 10rpx;
+  text-align: center;
+}
+
+.score-select-section {
+  background-color: #363636;
+}
+
+
+.user-item {
+  display: inline-block;
+  padding: 20rpx;
+}
+
+.scoreItem {
+  display: inline-block;  
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  margin: 1%;
+  border-radius: 50%;
+  border: 1px solid #ccc;  
+  text-align: center;
+  padding: 10rpx;
+
+  background-color: #fff;
+}
+
+.scoreItem:last-child {
+    width: 120rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+}
+
+.scoreItem.selected {
+  background-color: #363636;
+  color: #fff;
+}
+
+.player-select-section .user-item.selected .userinfo-avatar {
+  width:120rpx;
+  height:120rpx;
+  border: 10rpx #F9B82E solid;
+}

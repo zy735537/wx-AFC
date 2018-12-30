@@ -44,8 +44,7 @@ Page({
     wx.stopPullDownRefresh();
     this.loadAllData();
   },
-  onLoad: function () {   
-    //this.showFooter();
+  onLoad: function () {       
     this.setData({ iconList: iconList });
     var currentGameId = session.getGameId();
     if (currentGameId == null) {
@@ -53,8 +52,6 @@ Page({
     } else {      
       this.loadAllData();
     }    
-
-    //wx.showTabBar();
   },
   onShow: function() {
     this.setData({ isAuthenticated: session.isAuthenticated() });

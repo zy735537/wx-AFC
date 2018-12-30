@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/signin/signin",
     "pages/logs/logs",
-    "pages/game-history/game-history"
+    "pages/game-history/game-history",    
+    "pages/match/add"
   ],
   "window": {
     "backgroundColor": "#363636",

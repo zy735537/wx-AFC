@@ -3,12 +3,12 @@
 
 <main>
   <view slot="header" class="user-info">
-    <template is="me" data="{{...myRank}}"/>  
+    <template is="me" data="{{...myRank}}"/>      
   </view>
 
   <view slot="content" class="content">
-    <view class="chart-container">
-      <ec-canvas id="chart-container" canvas-id="person-chart" ec="{{ ec }}"></ec-canvas>
+    <view class="chart-container">      
+      <ec-canvas id="chart-container" canvas-id="person-chart" ec="{{ ec }}"></ec-canvas>      
     </view>
 
     <view wx:for="{{groupedMatchList}}" wx:for-item="group">
@@ -45,27 +45,27 @@
 </template>
 
 <template name="match">
-  <view class="match list-group-item rankItem" id="matchRow8148" data-match-id="8148" hidefocus="true">
+  <view class="match list-group-item rankItem" id="matchRow{{MatchId}}" data-match-id="{{MatchId}}" hidefocus="true">
       <view class="match-person-a">
           <view class="user-icon name" data-person-id="{{PersonAId}}">
               <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="{{PersonAName}}" class="rank userinfo-avatar" src="{{PersonAIcon}}" alt="{{BadgeA}}" data-person-id="{{PersonAId}}" data-original-title="{{PersonAName}}"></image>
 
               <text class="badge person-{{PersonAId}}">{{BadgeA}}</text>
 
-              <text class="overall me">{{OverallA ? OverallA : '?'}}</text>
+              <text class="overall me">{{OverallA != null ? OverallA : '?'}}</text>
           </view>
 
         <view wx:if="{{PersonAId2 != null }}" class="user-icon name" data-person-id="{{PersonAId2}}">
           <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="{{PersonAName2}}" class="rank userinfo-avatar" src="{{PersonA2Icon}}" alt="{{BadgeA2}}" data-person-id="{{PersonAId2}}" data-original-title="{{PersonAName2}}"></image>
           <text class="badge person-{{PersonAId2}}">{{BadgeA2}}</text>
-          <text class="overall ">{{OverallA2 ? OverallA2 : '?'}}</text>
+          <text class="overall ">{{OverallA2 != null ? OverallA2 : '?'}}</text>
         </view>
       </view>
       <view class="match-score {{ !HasConfirmed ? 'unconfirmed' : (ScoreA > ScoreB ? 'win' : 'lose') }}">
         <view class='score'>
-          <text class="score-a">{{ScoreA ? ScoreA : '?'}}</text>
+          <text class="score-a">{{ScoreA != null ? ScoreA : '?'}}</text>
           <text class="score-separator">-</text>
-          <text class="score-b">{{ScoreB ? ScoreB : '?'}}</text>
+          <text class="score-b">{{ScoreB != null ? ScoreB : '?'}}</text>
         </view>        
         <text id='{{MatchId}}' wx:if="{{ CanBeRemoved }}" class='iconfont icon-delete_fill action-icon remove' bindtap='removeHandler'></text>
         <text id='{{MatchId}}' wx:if="{{ CanBeConfirmed }}" class='iconfont icon-success_fill action-icon confirm' bindtap='confirmHandler'></text>
@@ -74,12 +74,12 @@
           <view class="user-icon name" data-person-id="{{PersonBId}}">
               <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="{{PersonBName}}" class="rank userinfo-avatar" src="{{PersonBIcon}}" alt="{{BadgeB}}" data-person-id="{{PersonBId}}" data-original-title="{{PersonBName}}"></image>        
               <text class="badge  person-{{PersonBId}}">{{BadgeB}}</text>
-              <text class="overall ">{{OverallB ? OverallB : '?'}}</text>
+              <text class="overall ">{{OverallB != null ? OverallB : '?'}}</text>
           </view>
       <view wx:if="{{PersonBId2 != null }}" class="user-icon name" data-person-id="{{PersonBId2}}">
         <image tabindex="0" role="button" data-toggle="tooltip" data-placement="left" title="" data-content="{{PersonBName}}" class="rank userinfo-avatar" src="{{PersonB2Icon}}" alt="{{BadgeB2}}" data-person-id="{{PersonBId2}}" data-original-title="{{PersonBName2}}"></image>
         <text class="badge person-{{PersonBId2}}">{{BadgeB2}}</text>
-        <text class="overall ">{{OverallB2 ? OverallB2 : '?'}}</text>
+        <text class="overall ">{{OverallB2 != null ? OverallB2 : '?'}}</text>
       </view>
       </view>
   </view>

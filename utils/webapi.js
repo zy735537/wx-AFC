@@ -2,6 +2,7 @@ module.exports = {
   signIn: signIn,
   getDefaultGame: getDefaultGame,
   getAllGames: getAllGames,
+  getAllPersons: getAllPersons,
   getRankList: getRankList,
   getPersonRank: getPersonRank,
   getPageMatchesByPerson: getPageMatchesByPerson,
@@ -37,6 +38,14 @@ function signIn(options) {
 // }
 function getAllGames(options) {
   options.url = data.getAPIUrl('/Game/GetAllGames')
+  call(options)
+}
+
+// options: { 
+//   success: function (res) { ... } 
+// }
+function getAllPersons(options) {
+  options.url = data.getAPIUrl('/Game/GetAllPersons')
   call(options)
 }
 
