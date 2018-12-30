@@ -7,7 +7,8 @@ Component({
    * Component properties
    */
   properties: {
-    showFooter: Boolean 
+    showFooter: Boolean, 
+    showHeader: Boolean
   },
 
   /**

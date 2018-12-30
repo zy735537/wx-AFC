@@ -1,6 +1,6 @@
 <!--components/main.wxml-->
 <view class='container'>  
-  <view class="header">  
+  <view class="header" wx:if="{{showHeader}}">  
     <slot name="header"></slot>
   </view>  
   <view class="content {{showFooter ? '' : 'no-footer' }}">

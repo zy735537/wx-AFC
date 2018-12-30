@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<main showFooter='{{true}}'>
+<main showFooter='{{true}}' showHeader='{{true}}'>
   <view slot="header" class="gameinfo {{currentGame.Active ? '' : 'deactive'}}">  
     <picker class='' bindchange="gamePickerChange" range="{{gameList}}" range-key='Name'>
       <image bindtap="bindViewTap" class="gameinfo-avatar" src="{{iconList.logoUrl}}" mode="cover"></image>   
