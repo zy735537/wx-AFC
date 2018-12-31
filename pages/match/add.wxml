@@ -1,10 +1,11 @@
 <!--pages/match/add.wxml-->
-<main>
+<main showFooter='{{true}}' showHeader='{{true}}'>
   <view slot="header" class="user-info">
     <view class="match list-group-item rankItem" id="matchRow{{MatchId}}" data-match-id="{{MatchId}}" hidefocus="true">
         <view class="match-person-a">
-          <template is="player" data="{{...playerA}}"/>
-          <template wx:if="{{playerA2 != null }}" is="player" data="{{...playerA2}}"/>
+          <template wx:if="{{playerA == null && playerA2 == null}}" is="player" data="{{...placeholder}}"/>
+          <template wx:if="{{playerA != null}}" is="player" data="{{...playerA}}"/>
+          <template wx:if="{{playerA2 != null}}" is="player" data="{{...playerA2}}"/>
         </view>
         <view class="match-score {{ scoreA == null || scoreB == null ? '' : (scoreA > scoreB ? 'win' : 'lose') }}">
           <view class='score'>
@@ -14,7 +15,8 @@
           </view>                
         </view>
         <view class="match-person-b">
-          <template is="player" data="{{...playerB}}"/>
+          <template wx:if="{{playerB == null && playerB2 == null}}" is="player" data="{{...placeholder}}"/>
+          <template wx:if="{{playerB != null }}" is="player" data="{{...playerB}}"/>
           <template wx:if="{{playerB2 != null }}" is="player" data="{{...playerB2}}"/>
         </view>
     </view>
@@ -23,7 +25,7 @@
   <view slot="content" class="content">
     <view class='player-select-section'>  
       <block wx:for="{{playerList}}" wx:for-item="player">
-        <template is="player" data="{{...player}}"/>      
+        <template wx:if="{{!player.selected}}" is="player" data="{{...player}}"/>      
       </block>      
     </view>
 

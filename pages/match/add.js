@@ -11,15 +11,30 @@ Page({
    * Page initial data
    */
   data: {
-    scoreList: [],
-    playerList: [],
+    placeholder: { PersonId: -1, Icon: iconList.defaultUser, Badge: "?" },
     maxScore: 10,
+
+    scoreList: [],
+    playerList: [],    
     scoreA: null,
     scoreB: null,
     playerA: null,
     playerA2: null,
     playerB: null,
     playerB2: null
+  },
+
+  resetSelection: function() {
+    this.setData({
+      scoreList: [],
+      playerList: [],      
+      scoreA: null,
+      scoreB: null,
+      playerA: null,
+      playerA2: null,
+      playerB: null,
+      playerB2: null      
+    });    
   },
 
   getAllPersons: function () {        
@@ -30,7 +45,10 @@ Page({
   },
 
   loadAllPersons: function (data) {
+    wx.stopPullDownRefresh();
+
     if (data != null) {
+      var pList = [];
       for (var i = 0; i < data.length; ++i) {
         if (data[i].Icon != null) {
           data[i].Icon = globalData.getImageFullPath(data[i].Icon)
@@ -40,10 +58,14 @@ Page({
 
         data[i].Badge = util.getBadge(data[i].FirstName, data[i].LastName);        
         data[i].selected = false;
+
+        if (data[i].PersonId != 0) {
+          pList.push(data[i]);
+        }        
       }
       
       this.setData({
-        playerList: data
+        playerList: pList
       });
     }
   },  
@@ -60,7 +82,7 @@ Page({
       player.selected = false;
       if (this.data.playerA != null && this.data.playerA.PersonId == player.PersonId) {        
         this.setData({
-          playerA: null
+          playerA: null          
         });
       } else if (this.data.playerB != null && this.data.playerB.PersonId == player.PersonId) {        
         this.setData({
@@ -88,9 +110,16 @@ Page({
         });       
       } else if (this.data.playerA2 == null) {
         player.selected = true;
-        this.setData({
-          playerA2: player
-        });
+        if (this.data.playerB2 == null) {
+          this.setData({
+            playerA2: this.data.playerB,
+            playerB: player
+          });
+        } else {
+          this.setData({
+            playerA2: player            
+          });
+        }
       } else if (this.data.playerB2 == null) {
         player.selected = true;
         this.setData({
@@ -146,6 +175,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {     
+    this.resetSelection();
     this.getAllPersons();
     this.refreshScoreList();  
   },
@@ -181,8 +211,7 @@ Page({
   /**
    * Page event handler function--Called when user drop down
    */
-  onPullDownRefresh: function () {
-    wx.stopPullDownRefresh();
+  onPullDownRefresh: function () {    
     this.onLoad({});
   },
 

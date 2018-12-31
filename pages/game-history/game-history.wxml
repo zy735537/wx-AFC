@@ -1,7 +1,7 @@
 <!--pages/game-history/game-history.wxml-->
 <set-tab-bar bindunmount="leaveSetTabBarPage"></set-tab-bar>
 
-<main>
+<main showFooter='{{true}}' showHeader='{{true}}'>
   <view slot="header" class="user-info">
     <template is="me" data="{{...myRank}}"/>      
   </view>
