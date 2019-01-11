@@ -14,7 +14,6 @@
   background-color: #363636;
 }
 
-
 .user-item {
   display: inline-block;
   padding: 20rpx;
@@ -49,4 +48,19 @@
   width:120rpx;
   height:120rpx;
   border: 10rpx #F9B82E solid;
+}
+
+.user-icon text.badge.fullname {
+  position: static;
+  margin-left: 0;
+  display: block;
+  width: auto;
+  height: auto;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #F9B82E;
+  background-color:transparent;  
+  border: none;
+  padding: 6rpx;
+  border-radius: 10rpx
 }

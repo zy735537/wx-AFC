@@ -3,21 +3,23 @@
   <view slot="header" class="user-info">
     <view class="match list-group-item rankItem" id="matchRow{{MatchId}}" data-match-id="{{MatchId}}" hidefocus="true">
         <view class="match-person-a">
-          <template wx:if="{{playerA == null && playerA2 == null}}" is="player" data="{{...placeholder}}"/>
-          <template wx:if="{{playerA != null}}" is="player" data="{{...playerA}}"/>
-          <template wx:if="{{playerA2 != null}}" is="player" data="{{...playerA2}}"/>
+          <template wx:if="{{playerA == null && playerA2 == null}}" is="player-selected" data="{{...placeholder}}"/>
+          <template wx:if="{{playerA != null}}" is="player-selected" data="{{...playerA}}"/>
+          <template wx:if="{{playerA2 != null}}" is="player-selected" data="{{...playerA2}}"/>
         </view>
         <view class="match-score {{ scoreA == null || scoreB == null ? '' : (scoreA > scoreB ? 'win' : 'lose') }}">
           <view class='score'>
             <text class="score-a">{{scoreA != null ? scoreA : '?'}}</text>
             <text class="score-separator">-</text>
             <text class="score-b">{{scoreB != null ? scoreB : '?'}}</text>
-          </view>                
+          </view>          
+
+          <text wx:if="{{ isValid }}" class='iconfont icon-success_fill action-icon confirm' bindtap='addHandler'></text>  
         </view>
         <view class="match-person-b">
-          <template wx:if="{{playerB == null && playerB2 == null}}" is="player" data="{{...placeholder}}"/>
-          <template wx:if="{{playerB != null }}" is="player" data="{{...playerB}}"/>
-          <template wx:if="{{playerB2 != null }}" is="player" data="{{...playerB2}}"/>
+          <template wx:if="{{playerB == null && playerB2 == null}}" is="player-selected" data="{{...placeholder}}"/>
+          <template wx:if="{{playerB != null }}" is="player-selected" data="{{...playerB}}"/>
+          <template wx:if="{{playerB2 != null }}" is="player-selected" data="{{...playerB2}}"/>
         </view>
     </view>
   </view>
@@ -43,7 +45,15 @@
 <template name="player">
     <view class='user-item user-icon {{ selected ? "selected" : "" }}' data-person-id="{{PersonId}}" bindtap='playerTab'>
         <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="{{FullName}}" class="rank userinfo-avatar" src="{{Icon}}" alt="{{Badge}}" data-person-id="{{PersonId}}" data-original-title="{{FullName}}">?</image>
+        
+        <text class="badge fullname person-{{PersonId}}">{{FullName}}</text>            
+    </view>
+</template>
 
-        <text class="badge person-{{PersonId}}">{{Badge == null ? "?" : Badge}}</text>                
+<template name="player-selected">
+    <view class='user-item user-icon {{ selected ? "selected" : "" }}' data-person-id="{{PersonId}}" bindtap='playerTab'>
+        <image tabindex="0" role="button" data-toggle="tooltip" data-placement="right" title="" data-content="{{FullName}}" class="rank userinfo-avatar" src="{{Icon}}" alt="{{Badge}}" data-person-id="{{PersonId}}" data-original-title="{{FullName}}">?</image>
+
+        <text class="badge person-{{PersonId}}">{{Badge == null ? "?" : Badge}}</text>                        
     </view>
 </template>

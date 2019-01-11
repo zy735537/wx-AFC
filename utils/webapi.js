@@ -7,7 +7,8 @@ module.exports = {
   getPersonRank: getPersonRank,
   getPageMatchesByPerson: getPageMatchesByPerson,
   confirmMatch: confirmMatch,
-  removeMatch: removeMatch
+  removeMatch: removeMatch,
+  addMatch: addMatch
 }
 
 const data = require('data.js')
@@ -130,6 +131,23 @@ function confirmMatch(options) {
 // }
 function removeMatch(options) {
   options.url = data.getAPIUrl('/Game/RemoveMatch');
+  options.header = {
+    'content-type': 'application/json',
+    'Authorization': "Basic " + session.getToken()
+  };
+
+  call(options)
+}
+
+// options: { 
+//   data: { GameId: 7, IsGroup: true, PersonAId: 1, PersonBId: 2, PersonAId2: 22, PersonBId2: 21, 
+//           Scores: [{ PersonAId: 1, PersonBId: 2, PersonAScore: 10, PersonBScore: 7 }, ...]
+//         },
+//   success: function (res) { ... },
+//   loading: { title: 'loading...' }
+// }
+function addMatch(options) {
+  options.url = data.getAPIUrl('/Game/AddMatch');
   options.header = {
     'content-type': 'application/json',
     'Authorization': "Basic " + session.getToken()

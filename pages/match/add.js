@@ -4,6 +4,7 @@ const globalData = require('../../utils/data.js')
 const api = require('../../utils/webapi.js')
 const iconList = require('../../utils/icons.js')
 const util = require('../../utils/util.js')
+const loading = require('../../utils/loading.js')
 
 Page({
 
@@ -21,7 +22,38 @@ Page({
     playerA: null,
     playerA2: null,
     playerB: null,
-    playerB2: null
+    playerB2: null,
+    isGroup: false,  // true - double; false - single
+    isValid: false 
+  },
+
+  validateInput: function() {
+    var is_Group = false;
+    var score_A = this.data.scoreA;
+    var score_B = this.data.scoreB;    
+    var is_Valid = score_A != null && score_B != null;    
+    var player_A = this.data.playerA;
+    var player_A2 = this.data.playerA2;
+    var player_B = this.data.playerB;
+    var player_B2 = this.data.playerB2;
+    if (player_A != null && player_A2 != null && player_B != null && player_B2 != null) {
+      is_Group = true;
+    } else {
+      if (player_A == null && player_A2 != null) {
+        player_A = player_A2;
+        player_A2 = null;
+      }
+
+      if (player_B == null && player_B2 != null) {
+        player_B = player_B2;
+        player_B2 = null;
+      }
+
+      is_Valid = is_Valid && (player_A != null && player_B != null);
+      is_Valid = is_Valid && ((player_A2 == null && player_B2 == null) || (player_A2 != null && player_B2 != null));
+    }    
+
+    this.setData({ isGroup: is_Group, isValid: is_Valid, playerA: player_A, playerA2: player_A2, playerB: player_B, playerB2: player_B2 });
   },
 
   resetSelection: function() {
@@ -46,7 +78,7 @@ Page({
 
   loadAllPersons: function (data) {
     wx.stopPullDownRefresh();
-
+    console.info(data);
     if (data != null) {
       var pList = [];
       for (var i = 0; i < data.length; ++i) {
@@ -58,6 +90,7 @@ Page({
 
         data[i].Badge = util.getBadge(data[i].FirstName, data[i].LastName);        
         data[i].selected = false;
+        data[i].FullName = data[i].FirstName + ' ' + data[i].LastName;
 
         if (data[i].PersonId != 0) {
           pList.push(data[i]);
@@ -69,6 +102,10 @@ Page({
       });
     }
   },  
+
+  addHandler: function(event) {
+    loading.showError("Hi, match adding");
+  },
 
   playerTab: function (event) {    
     var IdSelected = event.currentTarget.dataset.personId;
@@ -131,6 +168,8 @@ Page({
     this.setData({
       playerList: playerlist
     });    
+
+    this.validateInput();    
   },
 
   scroeTab: function (event) {    
@@ -147,8 +186,9 @@ Page({
       b = scoreSelected;
     }  
 
-    this.setData({ scoreA: a, scoreB: b });        
+    this.setData({ scoreA: a, scoreB: b });   
     this.refreshScoreList();
+    this.validateInput();
   },
 
   getPlayerById: function(id) {
