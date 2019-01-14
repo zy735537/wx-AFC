@@ -1,5 +1,5 @@
 <!--pages/match/add.wxml-->
-<main showFooter='{{true}}' showHeader='{{true}}'>
+<main showFooter='{{false}}' showHeader='{{true}}'>
   <view slot="header" class="user-info">
     <view class="match list-group-item rankItem" id="matchRow{{MatchId}}" data-match-id="{{MatchId}}" hidefocus="true">
         <view class="match-person-a">
@@ -25,18 +25,18 @@
   </view>
 
   <view slot="content" class="content">
-    <view class='player-select-section'>  
-      <block wx:for="{{playerList}}" wx:for-item="player">
-        <template wx:if="{{!player.selected}}" is="player" data="{{...player}}"/>      
-      </block>      
-    </view>
-
     <view class='score-select-section'>
       <view wx:for="{{scoreList}}" wx:for-item="item"
             data-score="{{item.score}}"
             class='scoreItem {{ item.selected ? "selected" : "" }}' bindtap="scroeTab">
         {{item.score}}
       </view>
+    </view>
+
+    <view class='player-select-section'>  
+      <block wx:for="{{playerList}}" wx:for-item="player">
+        <template wx:if="{{!player.selected}}" is="player" data="{{...player}}"/>      
+      </block>      
     </view>
   </view>
 

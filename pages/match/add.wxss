@@ -4,13 +4,16 @@
 }
 
 .player-select-section,
-.score-select-section {
-  /* background-color: #fff; */
+.score-select-section {  
   padding: 10rpx;
   text-align: center;
 }
 
-.score-select-section {
+/* .score-select-section {
+  background-color: #363636;
+} */
+
+.player-select-section {
   background-color: #363636;
 }
 
@@ -21,22 +24,21 @@
 
 .scoreItem {
   display: inline-block;  
-  width: 100rpx;
-  height: 100rpx;
-  line-height: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
+  line-height: 120rpx;
   margin: 1%;
   border-radius: 50%;
   border: 1px solid #ccc;  
-  text-align: center;
-  padding: 10rpx;
+  text-align: center;  
 
   background-color: #fff;
 }
 
 .scoreItem:last-child {
-    width: 120rpx;
-    height: 120rpx;
-    line-height: 120rpx;
+    width: 150rpx;
+    height: 150rpx;
+    line-height: 150rpx;
 }
 
 .scoreItem.selected {

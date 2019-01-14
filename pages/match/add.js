@@ -5,6 +5,7 @@ const api = require('../../utils/webapi.js')
 const iconList = require('../../utils/icons.js')
 const util = require('../../utils/util.js')
 const loading = require('../../utils/loading.js')
+const session = require('../../utils/session.js')
 
 Page({
 
@@ -56,7 +57,7 @@ Page({
     this.setData({ isGroup: is_Group, isValid: is_Valid, playerA: player_A, playerA2: player_A2, playerB: player_B, playerB2: player_B2 });
   },
 
-  resetSelection: function() {
+  initSelection: function() {
     this.setData({
       scoreList: [],
       playerList: [],      
@@ -65,8 +66,13 @@ Page({
       playerA: null,
       playerA2: null,
       playerB: null,
-      playerB2: null      
+      playerB2: null,
+      IsGroup: false,
+      isValid: false
     });    
+
+    this.getAllPersons();
+    this.refreshScoreList();  
   },
 
   getAllPersons: function () {        
@@ -104,7 +110,39 @@ Page({
   },  
 
   addHandler: function(event) {
-    loading.showError("Hi, match adding");
+    var gameId = session.getGameId();
+    if (gameId == null) {
+      loading.showError('Unknown game. Re-sign in?');
+      return;
+    }
+
+    this.validateInput();
+    if (!this.data.isValid) {
+      loading.showError('Invalid match data');
+      return;
+    }
+
+    var matchData = { 
+      GameId: gameId, 
+      Date: new Date(),
+      IsGroup: this.data.isGroup, 
+      PersonAId: this.data.playerA.PersonId,
+      PersonBId: this.data.playerB.PersonId,
+      PersonAId2: this.data.playerA2 == null ? null : this.data.playerA2.PersonId,
+      PersonBId2: this.data.playerB2 == null ? null : this.data.playerB2.PersonId,
+      Scores: [
+        { 
+          PersonAId: this.data.playerA.PersonId, 
+          PersonBId: this.data.playerB.PersonId, 
+          PersonAScore: this.data.scoreA, 
+          PersonBScore: this.data.scoreB }
+        ]
+    };
+
+    api.addMatch({
+      data: matchData,
+      success: this.initSelection
+    });
   },
 
   playerTab: function (event) {    
@@ -215,9 +253,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {     
-    this.resetSelection();
-    this.getAllPersons();
-    this.refreshScoreList();  
+    this.initSelection();
   },
 
   /**
@@ -252,7 +288,7 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh: function () {    
-    this.onLoad({});
+    this.initSelection();
   },
 
   /**

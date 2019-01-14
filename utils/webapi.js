@@ -148,7 +148,8 @@ function removeMatch(options) {
 // }
 function addMatch(options) {
   options.url = data.getAPIUrl('/Game/AddMatch');
-  options.header = {
+  options.method = "POST";
+  options.header = {    
     'content-type': 'application/json',
     'Authorization': "Basic " + session.getToken()
   };
