@@ -50,11 +50,11 @@
 </template>
 
 <template name="me">    
-  <view class='person-rank rankItem row' data-game-id="{{GameId}}" data-person-id="{{PersonId}}">    
-    <text class='rank item col-4' data-suffix='{{rankSuffix}}'>{{Rank}}</text>    
+  <view class='person-rank rankItem row' data-game-id="{{GameId}}" data-person-id="{{PersonId}}" bindtap="playerItemTab">    
+    <text class='rank item col-4' data-suffix='{{rankSuffix == null ? "" : rankSuffix}}'>{{Rank}}</text>    
     <view class="name-detail item col-4">
       <image class="userinfo-avatar me item" src="{{IconUrl}}" mode="cover"></image>
     </view>    
-    <text class="overall item col-4" data-suffix='pts'>{{Overall}}</text>
+    <text class="overall item col-4" data-suffix='{{Overall == null ? "" : "pts"}}'>{{Overall == null ? '' : Overall}}</text>
   </view>    
 </template>

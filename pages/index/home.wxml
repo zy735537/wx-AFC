@@ -1,0 +1,11 @@
+<!--pages/index/home.wxml-->
+<text>pages/index/home.wxml</text>
+
+<swiper>  
+    <swiper-item>
+      <include src="index.wxml" />
+    </swiper-item>  
+    <swiper-item>
+      <include src="match/add.wxml" />
+    </swiper-item>  
+</swiper>

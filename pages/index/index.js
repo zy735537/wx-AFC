@@ -33,12 +33,13 @@ Page({
     this.loadAllData();
   },
   playerItemTab: function (event) {
-    var gameId = event.currentTarget.dataset.gameId
-    var personId = event.currentTarget.dataset.personId
-
-    wx.navigateTo({
-      url: '../game-history/game-history?gameId=' + gameId + "&personId=" + personId
-    })
+    var gameId = event.currentTarget.dataset.gameId == null ? session.getGameId() : event.currentTarget.dataset.gameId;
+    var personId = event.currentTarget.dataset.personId == null ? session.getPersonId() : event.currentTarget.dataset.personId;    
+    if (gameId != null && personId != null) {
+      wx.navigateTo({
+        url: '../game-history/game-history?gameId=' + gameId + "&personId=" + personId
+      });
+    } 
   },
   onPullDownRefresh: function() {    
     wx.stopPullDownRefresh();
@@ -144,6 +145,11 @@ Page({
       this.setData({
             myRank: data
           }) 
-    }    
+    } else {
+      data = { rankSuffix: null, Overall: null };
+      this.setData({
+        myRank: data
+      })       
+    } 
   }
 })

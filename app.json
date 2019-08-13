@@ -1,10 +1,11 @@
 {
-  "pages": [
+  "pages": [    
     "pages/index/index",
     "pages/signin/signin",
     "pages/logs/logs",
-    "pages/game-history/game-history",    
-    "pages/match/add"
+    "pages/game-history/game-history",
+    "pages/match/add",
+    "pages/index/home"
   ],
   "window": {
     "backgroundColor": "#363636",

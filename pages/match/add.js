@@ -7,6 +7,8 @@ const util = require('../../utils/util.js')
 const loading = require('../../utils/loading.js')
 const session = require('../../utils/session.js')
 
+const AUTH_MODE = 'fingerPrint'
+
 Page({
 
   /**
@@ -122,9 +124,13 @@ Page({
       return;
     }
 
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getMonth();
+    var day = today.getDate();
     var matchData = { 
       GameId: gameId, 
-      Date: new Date(),
+      Date: new Date(Date.UTC(year, month, day)),
       IsGroup: this.data.isGroup, 
       PersonAId: this.data.playerA.PersonId,
       PersonBId: this.data.playerB.PersonId,
@@ -303,5 +309,64 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  // startAuth() {
+  //   const startSoterAuthentication = () => {
+  //     wx.startSoterAuthentication({
+  //       requestAuthModes: [AUTH_MODE],
+  //       challenge: 'test',
+  //       authContent: '小程序示例',
+  //       success: (res) => {
+  //         wx.showToast({
+  //           title: '认证成功'
+  //         })
+  //       },
+  //       fail: (err) => {
+  //         console.error(err)
+  //         wx.showModal({
+  //           title: '失败',
+  //           content: '认证失败',
+  //           showCancel: false
+  //         })
+  //       }
+  //     })
+  //   }
+
+  //   const checkIsEnrolled = () => {
+  //     wx.checkIsSoterEnrolledInDevice({
+  //       checkAuthMode: AUTH_MODE,
+  //       success: (res) => {
+  //         console.log(res)
+  //         if (parseInt(res.isEnrolled) <= 0) {
+  //           wx.showModal({
+  //             title: '错误',
+  //             content: '您暂未录入指纹信息，请录入后重试',
+  //             showCancel: false
+  //           })
+  //           return
+  //         }
+  //         startSoterAuthentication();
+  //       },
+  //       fail: (err) => {
+  //         console.error(err)
+  //       }
+  //     })
+  //   }
+
+  //   wx.checkIsSupportSoterAuthentication({
+  //     success: (res) => {
+  //       console.log(res)
+  //       checkIsEnrolled()
+  //     },
+  //     fail: (err) => {
+  //       console.error(err)
+  //       wx.showModal({
+  //         title: '错误',
+  //         content: '您的设备不支持指纹识别',
+  //         showCancel: false
+  //       })
+  //     }
+  //   })
+  // }
 })
